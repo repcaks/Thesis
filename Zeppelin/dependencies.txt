@@ -1,0 +1,4 @@
+%dep
+z.load("/usr/hdp/3.0.1.0-187/hive_warehouse_connector/hive-warehouse-connector-assembly-1.0.0.3.0.1.0-187.jar")
+z.load("/jars/kafka-clients-1.1.0.jar/spark-sql-kafka-0-10_2.11-2.3.2.3.1.0.6-1.jar")
+z.load("/jars/kafka-clients-1.1.0.jar/SparkWarsawRealTimePipeline//kafka-clients-1.1.0.jar")

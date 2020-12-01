@@ -1,0 +1,8 @@
+--cmd create kafka topic for twitter data | topic: twitter
+
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --zookeeper sandbox-hdp.hortonworks.com:2181 --create --topic twitter --partitions 1 --replication-factor 1
+
+
+--cmd kafka consumer for topic: twitter
+
+/usr/hdp/current/kafka-broker/bin/kafka-console-consumer.sh --bootstrap-server sandbox-hdp.hortonworks.com:6667 --topic twitter
