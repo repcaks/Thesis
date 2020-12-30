@@ -1,0 +1,50 @@
+{
+  "type": "kafka",
+  "dataSchema": {
+    "dataSource": "twitter",
+    "parser": {
+      "type": "string",
+      "parseSpec": {
+        "format": "json",
+        "timestampSpec": {
+          "column": "time",
+          "format": "auto"
+        },
+        "dimensionsSpec": {
+          "dimensions": [
+            "user_id",
+            "user_name",
+            "user_followers_count",
+            "user_statuses_count",
+            "favourites_count",
+            "id",
+            "source",
+            "text",
+            "user_account_created_time",
+            "user_friends_count"
+          ]
+        }
+      }
+    },
+    "metricsSpec" : [],
+    "granularitySpec": {
+      "type": "uniform",
+      "segmentGranularity": "DAY",
+      "queryGranularity": "NONE",
+      "rollup": false
+    }
+  },
+  "tuningConfig": {
+    "type": "kafka",
+    "reportParseExceptions": false
+  },
+  "ioConfig": {
+    "topic": "twitter",
+    "replicas": 1,
+    "taskDuration": "PT10M",
+    "completionTimeout": "PT20M",
+    "consumerProperties": {
+      "bootstrap.servers": "sandbox-hdp.hortonworks.com:6667"
+    }
+  }
+}

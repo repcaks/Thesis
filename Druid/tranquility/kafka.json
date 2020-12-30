@@ -1,0 +1,59 @@
+{
+    "dataSources" : {
+      "twitter_demo" : {
+        "spec" : {
+          "dataSchema" : {
+            "dataSource" : "twitter_demo",
+            "parser" : {
+              "type" : "string",
+              "parseSpec" : {
+                "timestampSpec" : {
+                  "column" : "time",
+                  "format" : "auto"
+                },
+                "dimensionsSpec" : {
+                  "dimensions" : [],
+                  "dimensionExclusions" : [
+                    "timestamp",
+                    "value"
+                  ]
+                },
+                "format" : "json"
+              }
+            },
+            "granularitySpec" : {
+              "type" : "uniform",
+              "segmentGranularity" : "six_hour",
+              "queryGranularity" : "none"
+            },
+            "metricsSpec" : []
+          },
+          "ioConfig" : {
+            "type" : "realtime"
+          },
+          "tuningConfig" : {
+            "type" : "realtime",
+            "maxRowsInMemory" : "100000",
+            "intermediatePersistPeriod" : "PT10M",
+            "windowPeriod" : "PT720000M"
+          }
+        },
+        "properties" : {
+          "task.partitions" : "1",
+          "task.replicants" : "1",
+          "topicPattern" : "twitter_demo"
+        }
+      }
+    },
+    "properties" : {
+      "zookeeper.connect" : "sandbox-hdf.hortonworks.com:2181", "sandbox-hdp.hortonworks.com:2181",
+      "druid.discovery.curator.path" : "/druid/discovery",
+      "druid.selectors.indexing.serviceName" : "druid/overlord",
+      "commit.periodMillis" : "15000",
+      "consumer.numThreads" : "2",
+      "kafka.zookeeper.connect" : "sandbox-hdf.hortonworks.com:2181", "sandbox-hdp.hortonworks.com:2181",
+      "kafka.group.id" : "tranquility-kafka"
+    }
+  }
+  
+  
