@@ -2,15 +2,12 @@ import pandas as pd
 import os
 
 
-def merge_stock_data(nyse, nasdaq, crypto):
+def merge_stock_data(nyse, nasdaq):
 
-    pd_array = [pd.read_csv(nyse), pd.read_csv(nasdaq), pd.read_csv(crypto)]
+    pd_array = [pd.read_csv(nyse), pd.read_csv(nasdaq)]
     all = pd.concat(pd_array)
-    all.reset_index(drop=True, inplace=True)
-    all.index.name = "Id"
-    all.index = all.index + 1
     all = all.dropna()
-    all.to_csv("Data/Cleaned/stock-all.csv")
+    all.to_csv("Data/Cleaned/stock-all.csv", index=False)
 
 
 def nyse_cleaner(dirname):
@@ -26,13 +23,7 @@ def nyse_cleaner(dirname):
     df = df.rename(columns={'Unnamed: 0':'Date','open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close',
                             'adjclose': 'Adjclose', 'volume': 'Volume', 'ticker': 'Ticker'})
 
-    # df.reset_index(drop=True, inplace=True)
-    # df.index.name = "Id"
-    # df.index = df.index + 1
-
-    df['Stock'] = pd.Series('NYSE', index=df.index)
-
-    df.to_csv("Data/Cleaned/CleanedNyse/NyseAll.csv",index=False)
+    df.to_csv("Data/Cleaned/CleanedNyse/NyseAll.csv", index=False)
 
 
 def nasdaq_cleaner(dirname):
@@ -47,13 +38,7 @@ def nasdaq_cleaner(dirname):
     df = df.rename(columns={'Unnamed: 0': 'Date', 'open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close',
                             'adjclose': 'Adjclose', 'volume': 'Volume', 'ticker': 'Ticker'})
 
-    # df.reset_index(drop=True, inplace=True)
-    # df.index.name = "Id"
-    # df.index = df.index + 1
-
-    df['Stock'] = pd.Series('NASDAQ', index=df.index)
-
-    df.to_csv("Data/Cleaned/CleanedNasdaq/NasdaqAll.csv",index=False)
+    df.to_csv("Data/Cleaned/CleanedNasdaq/NasdaqAll.csv", index=False)
 
 
 def crypto_cleaner(dirname):
@@ -68,33 +53,26 @@ def crypto_cleaner(dirname):
     df = df.rename(columns={'Unnamed: 0':'Date','open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close',
                             'adjclose': 'Adjclose', 'volume': 'Volume', 'ticker': 'Ticker'})
 
-    # df.reset_index(drop=True, inplace=True)
-    # df.index.name = "Id"
-    # df.index = df.index + 1
 
-    df['Stock'] = pd.Series('Coinmarketcap', index=df.index)
-
-    df.to_csv("Data/Cleaned/CleanedCrypto/CryptoAll.csv",index=False)
+    df.to_csv("Data/Cleaned/CleanedCrypto/CryptoAll.csv", index=False)
 
 
 def gold_cleaner(filename):
     df = pd.read_csv(filename)
-    df.index.name = "Id"
-    df.index = df.index + 1
     df = df.rename(columns={'Unnamed: 0':'Date','open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close',
                             'adjclose': 'Adjclose', 'volume': 'Volume', 'ticker': 'Ticker'})
     df = df.dropna()
-    df.to_csv("Cleaned/Gold.csv")
+    df.to_csv("Data/Cleaned/Gold.csv", index=False)
 
 
 def oil_cleaner(filename):
     df = pd.read_csv(filename)
-    df.index.name = "Id"
-    df.index = df.index + 1
+    # df.index.name = "Id"
+    # df.index = df.index + 1
     df = df.rename(columns={'Unnamed: 0':'Date','open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close',
                             'adjclose': 'Adjclose', 'volume': 'Volume', 'ticker': 'Ticker'})
     df = df.dropna()
-    df.to_csv("Data/Cleaned/Oil.csv")
+    df.to_csv("Data/Cleaned/Oil.csv", index=False)
 
 
 def news_cleaner(filename):
@@ -106,13 +84,4 @@ def news_cleaner(filename):
     df = df.dropna()
     df.to_csv("Data/Cleaned/News.csv")
 
-
-if __name__ == '__main__':
-    crypto_cleaner("Data/Top100_Crypto/")
-    nyse_cleaner("Data/NYSE/")
-    nasdaq_cleaner("Data/NASDAQ/")
-    merge_stock_data("Data/Cleaned/CleanedNyse/NyseAll.csv", "Data/Cleaned/CleanedNasdaq/NasdaqAll.csv", "Data/Cleaned/CleanedCrypto/CryptoAll.csv")
-    news_cleaner("Data/abcnews-date-text.csv")
-    gold_cleaner('Data/Gold/Gold.csv')
-    oil_cleaner('Data/Oil/Oil.csv')
 
