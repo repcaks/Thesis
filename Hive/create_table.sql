@@ -29,8 +29,15 @@ OUTPUTFORMAT
 LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/hive/stockexchange.db/share'
 tblproperties('skip.header.line.count'='1');
 
-load data local inpath 'hdfs://sandbox-hdp.hortonworks.com:8020/user/hive/tmp/data/shares.orc' into table stockexchange.Share;
+load data inpath 'hdfs://sandbox-hdp.hortonworks.com:8020/user/hive/tmp/data/shares.orc' into table stockexchange.Share;
 
+--tmp table for etl purposes:
+CREATE TABLE IF NOT EXISTS etl_share(`date` DATE, open DOUBLE, high DOUBLE, low DOUBLE, close DOUBLE, adjclose DOUBLE, volume INT,ticker CHAR(5));
+
+insert into share select * from etl_share;
+truncate table share_etl;
+
+-----------------------------------------------------
 
 CREATE EXTERNAL TABLE IF NOT EXISTS Company(id INT,ticker CHAR(5),name STRING,address STRING,city STRING,zip STRING,industry STRING,exchange STRING, description STRING)
 CLUSTERED BY(ticker) INTO 64 BUCKETS 
@@ -75,14 +82,16 @@ stored as textfile
 LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/hive/stockexchange.db/news'
 tblproperties('skip.header.line.count'='1');
 
+-------------------------------------------------
 
-CREATE EXTERNAL TABLE IF NOT EXISTS Twitter(content STRING,date Date,source STRING, url STRING,ticker CHAR(5))
+CREATE EXTERNAL TABLE IF NOT EXISTS Twitter(`date` DATE,id STRING,source STRING,user_account_created_time STRING, user_favourites_count INT,user_followers_count INT, user_friends_count INT,user_id STRING, user_name STRING,user_statuses_count STRING )
 ROW FORMAT SERDE
  'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 stored as textfile
 LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/hive/stockexchange.db/twitter'
 tblproperties('skip.header.line.count'='1');
 
+-------------------------------------------------
 
 CREATE EXTERNAL TABLE IF NOT EXISTS Coronavirus(date DATE,cases INT,deaths INT,country STRING,countryID CHAR(5),continent STRING,CasesPer100 DOUBLE)
 ROW FORMAT DELIMITED FIELDS TERMINATED by','
@@ -90,18 +99,11 @@ stored as textfile
 LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/hive/stockexchange.db/coronavirus'
 tblproperties('skip.header.line.count'='1');
 
--- Tables used by ETL or other services:
-
-CREATE TABLE IF NOT EXISTS Share_etl(`date` DATE, open DOUBLE, high DOUBLE, low DOUBLE, close DOUBLE, adjclose DOUBLE, volume INT,ticker CHAR(5));
-
-INSERT INTO TABLE share SELECT * from ShareETL;
---testing query: insert into stockexchange.test values(from_unixtime(1609165800, 'yyyy-MM-dd'),1.0,1.0,1.0,1.0,1.0,1,"test");
+-- Tables used by other services:
 
 CREATE TABLE IF NOT EXISTS ApplePricePredictionTmp
 AS select * from Share where ticker="AAPL"
 ORDER BY `date` asc;
 
-
-CREATE TABLE IF NOT EXISTS Twitter(favourites_count STRING,id String,source String,text String,time String,user_account_created_time String,user_followers_count String,user_friends_count String,user_id String,user_name String,user_statuses_count String )
 
 

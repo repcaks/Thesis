@@ -28,7 +28,7 @@ val hive = HiveWarehouseSession.session(spark).build()
 
 hive.setDatabase("stockexchange")
 
-hive.createTable("twitter").ifNotExists().column("id", "String").column("source", "string").column("text", "string").column("`date`", "String").column("user_account_created_time", "string").column("favourites_count", "int").column("user_followers_count", "int").column("user_friends_count", "int").column("user_id", "string").column("user_name", "string").column("user_statuses_count", "string").create()
+hive.createTable("twitter").ifNotExists().column("`date`", "String").column("id", "string").column("source", "string").column("text", "String").column("user_account_created_time", "string").column("user_favourites_count", "int").column("user_followers_count", "int").column("user_friends_count", "int").column("user_id", "string").column("user_name", "string").column("user_statuses_count", "string").create()
 
 
 val kafkaParams = Map[String,String](
@@ -58,9 +58,6 @@ lines.foreachRDD(
         val rawDF = rdd.toDF("msg")
 
         if(!rawDF.rdd.isEmpty()) {
-
-          println("Raw")
-        //   rawDF.printSchema()
           
           val schema = spark.read.json(rawDF.select("msg").as[String]).schema
             
