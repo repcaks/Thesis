@@ -10,18 +10,18 @@ from jsonpath_ng import jsonpath, parse
 
 
 def main():
-    # tickers() #get tickers
-    # nyse_data_download()
-    # nasdaq_data_download()
-    # merge_stock_data("Data/Cleaned/CleanedNyse/NyseAll.csv", "Data/Cleaned/CleanedNasdaq/NasdaqAll.csv")
-    # gold_historical_data_download()
-    # oil_historical_data_download()
-    # crypto_historical_data_download()
-    # create_date_table()
-    # create_company_table()
+    tickers() #get tickers
+    nyse_data_download()
+    nasdaq_data_download()
+    merge_stock_data("Data/Cleaned/CleanedNyse/NyseAll.csv", "Data/Cleaned/CleanedNasdaq/NasdaqAll.csv")
+    gold_historical_data_download()
+    oil_historical_data_download()
+    crypto_historical_data_download()
+    create_date_table()
+    create_company_table()
     create_income_statement_table()
     # generateYahooCallsForShareETL()
-    # covid_cleaner("covid.xlsx")
+    covid_cleaner("covid.xlsx")
 
 
 def tickers():
