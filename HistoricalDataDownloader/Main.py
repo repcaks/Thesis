@@ -3,24 +3,26 @@ from yahoo_fin.stock_info import *
 import pandas as pd
 import requests
 from requests.exceptions import HTTPError
-from DataCleaner import nyse_cleaner, nasdaq_cleaner,\
-    gold_cleaner, oil_cleaner, merge_stock_data, crypto_cleaner,covid_cleaner
+from DataCleaner import nyse_cleaner, nasdaq_cleaner, \
+    gold_cleaner, oil_cleaner, merge_stock_data, crypto_cleaner, covid_cleaner
 import json
 from jsonpath_ng import jsonpath, parse
 
 
 def main():
-    tickers() #get tickers
-    nyse_data_download()
-    nasdaq_data_download()
-    merge_stock_data("Data/Cleaned/CleanedNyse/NyseAll.csv", "Data/Cleaned/CleanedNasdaq/NasdaqAll.csv")
-    gold_historical_data_download()
-    oil_historical_data_download()
-    crypto_historical_data_download()
-    create_date_table()
-    create_company_table()
-    generateYahooCallsForShareETL()
+    # tickers() #get tickers
+    # nyse_data_download()
+    # nasdaq_data_download()
+    # merge_stock_data("Data/Cleaned/CleanedNyse/NyseAll.csv", "Data/Cleaned/CleanedNasdaq/NasdaqAll.csv")
+    # gold_historical_data_download()
+    # oil_historical_data_download()
+    # crypto_historical_data_download()
+    # create_date_table()
+    # create_company_table()
+    create_income_statement_table()
+    # generateYahooCallsForShareETL()
     # covid_cleaner("covid.xlsx")
+
 
 def tickers():
     tickers = tickers_sp500()
@@ -42,7 +44,7 @@ def tickers():
 
     name_col = data['Name']
     names = []
-    
+
     for name in name_col:
         x = name.replace(' USD', '')
         names.append(x)
@@ -113,13 +115,14 @@ def nasdaq_data_download():
             print(ticker)
     nasdaq_cleaner("Data/NASDAQ/")
 
+
 def nasdaq_ticker_data_download(ticker):
-        try:
-            data = si.get_data(ticker)
-            data.head()
-            data.to_csv(ticker + ".csv")
-        except:
-            print('wrong '+ticker)
+    try:
+        data = si.get_data(ticker)
+        data.head()
+        data.to_csv(ticker + ".csv")
+    except:
+        print('wrong ' + ticker)
 
 
 def gold_historical_data_download():
@@ -127,6 +130,7 @@ def gold_historical_data_download():
     data.head()
     data.to_csv("Data/Gold/Gold.csv")
     gold_cleaner('Data/Gold/Gold.csv')
+
 
 def oil_historical_data_download():
     data = get_data('CL=F')
@@ -147,7 +151,8 @@ def generateYahooCallsForShareETL():
             output.write(api_body)
 
     for ticker in tickers_nyse:
-        api_body = "https://query1.finance.yahoo.com/v8/finance/chart/{0}?symbol={0}&interval=1d\n".format(ticker.rstrip())
+        api_body = "https://query1.finance.yahoo.com/v8/finance/chart/{0}?symbol={0}&interval=1d\n".format(
+            ticker.rstrip())
         output.write(api_body)
 
     output.close()
@@ -165,15 +170,14 @@ def create_company_table():
 
     file = open("companies.csv", "a")
     for ticker in all:
-        company_info_url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/"+ticker+"?modules=summaryProfile%2Cprice"
+        company_info_url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/" + ticker + "?modules=summaryProfile%2Cprice"
 
         try:
             response = requests.get(company_info_url)
             response.raise_for_status()
-            jsonResponse = response.json()
+            json_response = response.json()
 
-
-            json_data = json.loads(json.dumps(jsonResponse))
+            json_data = json.loads(json.dumps(json_response))
 
             ticker = parse('$.quoteSummary.result[0].price.symbol').find(json_data)
             name = parse('$.quoteSummary.result[0].price.longName').find(json_data)
@@ -182,8 +186,8 @@ def create_company_table():
             zip_code = parse('$.quoteSummary.result[0].summaryProfile.zip').find(json_data)
             sector = parse('$.quoteSummary.result[0].summaryProfile.sector').find(json_data)
             exchange = parse('$.quoteSummary.result[0].price.exchangeName').find(json_data)
-            row = ticker[0].value +", " + name[0].value + ", " + address[0].value + ", " + city[0].value +", " + zip_code[0].value +", " + sector[0].value + \
-                  ", " + exchange[0].value
+            row = ticker[0].value + "," + name[0].value + "," + address[0].value + "," + city[0].value + "," + zip_code[
+                0].value + "," + sector[0].value + "," + exchange[0].value
 
             file.write(row)
             file.write("\n")
@@ -195,6 +199,62 @@ def create_company_table():
     file.close()
 
 
+def create_income_statement_table():
+    tickers = []
+
+    tickers_nasd = tickers_nasdaq()
+    with open('nyse.txt', 'r') as filehandle:
+        for line in filehandle:
+            tickers.append(line.replace('\n', ''))
+
+    all = tickers + tickers_nasd
+
+    file = open("incomeStatements.csv", "a")
+
+    for ticker in all:
+        company_info_url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/" + ticker + "?modules=incomeStatementHistoryQuarterly"
+
+        try:
+            response = requests.get(company_info_url)
+            response.raise_for_status()
+            json_response = response.json()
+
+            json_data = json.loads(json.dumps(json_response))
+
+            dates, total_revenue, cost_of_revenue, gross_profit, net_income = [], [], [], [], []
+            for _ in range(4):
+                dates.append(parse(
+                    '$.quoteSummary.result[0].incomeStatementHistoryQuarterly.incomeStatementHistory[' + str(
+                        _) + '].endDate.fmt').find(json_data)[0].value)
+
+                total_revenue.append(
+                    parse('$.quoteSummary.result[0].incomeStatementHistoryQuarterly.incomeStatementHistory[' + str(
+                        _) + '].totalRevenue.raw').find(json_data)[0].value)
+
+                cost_of_revenue.append(
+                    parse('$.quoteSummary.result[0].incomeStatementHistoryQuarterly.incomeStatementHistory[' + str(
+                        _) + '].costOfRevenue.raw').find(json_data)[0].value)
+
+                gross_profit.append(
+                    parse('$.quoteSummary.result[0].incomeStatementHistoryQuarterly.incomeStatementHistory[' + str(
+                        _) + '].grossProfit.raw').find(json_data)[0].value)
+
+                net_income.append(
+                    parse('$.quoteSummary.result[0].incomeStatementHistoryQuarterly.incomeStatementHistory[' + str(
+                        _) + '].netIncome.raw').find(json_data)[0].value)
+
+            for _ in range(4):
+                row = ticker + "," + dates[_] + "," + str(total_revenue[_]) + "," + str(cost_of_revenue[_]) + "," + str(
+                    gross_profit[_]) + "," + str(net_income[_])
+
+                file.write(row)
+                file.write("\n")
+
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+    file.close()
+
 if __name__ == "__main__":
     main()
-

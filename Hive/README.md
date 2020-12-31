@@ -22,7 +22,7 @@ Table Oil:
 https://query1.finance.yahoo.com/v8/finance/chart/CL=F?symbol=CL=F&interval=1d
 
 Table IncomeStatement:
-Apple income statement history quarterly :https://query1.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=incomeStatementHistoryQuarterly
+Apple income statement history quarterly: https://query1.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=incomeStatementHistoryQuarterly
 Apple income statement history yearly: https://query1.finance.yahoo.com/v10/finance/quoteSummary/AAPL?modules=incomeStatementHistory
 
 Table News:
