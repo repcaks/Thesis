@@ -39,7 +39,7 @@ truncate table share_etl;
 
 -----------------------------------------------------
 
-CREATE EXTERNAL TABLE IF NOT EXISTS Company(id INT,ticker CHAR(5),name STRING,address STRING,city STRING,zip STRING,industry STRING,exchange STRING, description STRING)
+CREATE EXTERNAL TABLE IF NOT EXISTS Company(id INT,ticker CHAR(5),name STRING,address STRING,city STRING,zip STRING,sector STRING,exchange STRING)
 CLUSTERED BY(ticker) INTO 64 BUCKETS 
 ROW FORMAT DELIMITED FIELDS TERMINATED by','
 stored as textfile
@@ -93,7 +93,7 @@ tblproperties('skip.header.line.count'='1');
 
 -------------------------------------------------
 
-CREATE EXTERNAL TABLE IF NOT EXISTS Coronavirus(date DATE,cases INT,deaths INT,country STRING,countryID CHAR(5),continent STRING,CasesPer100 DOUBLE)
+CREATE EXTERNAL TABLE IF NOT EXISTS Coronavirus(date DATE,cases INT,deaths INT,country STRING,countryID CHAR(5),population INT, continent STRING,CasesPer100 DOUBLE)
 ROW FORMAT DELIMITED FIELDS TERMINATED by','
 stored as textfile
 LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/hive/stockexchange.db/coronavirus'

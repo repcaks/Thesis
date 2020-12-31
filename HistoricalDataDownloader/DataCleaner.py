@@ -85,3 +85,20 @@ def news_cleaner(filename):
     df.to_csv("Data/Cleaned/News.csv")
 
 
+def covid_cleaner(filename):
+
+    df = pd.read_excel(
+        os.path.join(filename),
+        engine='openpyxl',
+    )
+    df.index.name = "id"
+    df.index = df.index + 1
+    df =df.drop(['day', 'month', 'year', 'countriesAndTerritories'], axis=1)
+    df = df.rename(columns={"dateRep": "date", "countryterritoryCode": "Country", "geoId": "countryID",
+                            "popData2019": "population", "continentExp": "Continent",
+                            "Cumulative_number_for_14_days_of_COVID-19_cases_per_100000": "CasesPer100" })
+
+    df.to_csv("Data/Covid.csv")
+
+
+

@@ -1,8 +1,13 @@
 from yahoo_fin import stock_info as si
 from yahoo_fin.stock_info import *
 import pandas as pd
+import requests
+from requests.exceptions import HTTPError
 from DataCleaner import nyse_cleaner, nasdaq_cleaner,\
-    gold_cleaner, oil_cleaner, merge_stock_data, crypto_cleaner
+    gold_cleaner, oil_cleaner, merge_stock_data, crypto_cleaner,covid_cleaner
+import json
+from jsonpath_ng import jsonpath, parse
+
 
 def main():
     tickers() #get tickers
@@ -13,7 +18,9 @@ def main():
     oil_historical_data_download()
     crypto_historical_data_download()
     create_date_table()
+    create_company_table()
     generateYahooCallsForShareETL()
+    # covid_cleaner("covid.xlsx")
 
 def tickers():
     tickers = tickers_sp500()
@@ -144,6 +151,49 @@ def generateYahooCallsForShareETL():
         output.write(api_body)
 
     output.close()
+
+
+def create_company_table():
+    tickers = []
+
+    tickers_nasd = tickers_nasdaq()
+    with open('nyse.txt', 'r') as filehandle:
+        for line in filehandle:
+            tickers.append(line.replace('\n', ''))
+
+    all = tickers + tickers_nasd
+
+    file = open("companies.csv", "a")
+    for ticker in all:
+        company_info_url = "https://query1.finance.yahoo.com/v10/finance/quoteSummary/"+ticker+"?modules=summaryProfile%2Cprice"
+
+        try:
+            response = requests.get(company_info_url)
+            response.raise_for_status()
+            jsonResponse = response.json()
+
+
+            json_data = json.loads(json.dumps(jsonResponse))
+
+            ticker = parse('$.quoteSummary.result[0].price.symbol').find(json_data)
+            name = parse('$.quoteSummary.result[0].price.longName').find(json_data)
+            address = parse('$.quoteSummary.result[0].summaryProfile.address1').find(json_data)
+            city = parse('$.quoteSummary.result[0].summaryProfile.city').find(json_data)
+            zip_code = parse('$.quoteSummary.result[0].summaryProfile.zip').find(json_data)
+            sector = parse('$.quoteSummary.result[0].summaryProfile.sector').find(json_data)
+            exchange = parse('$.quoteSummary.result[0].price.exchangeName').find(json_data)
+            row = ticker[0].value +", " + name[0].value + ", " + address[0].value + ", " + city[0].value +", " + zip_code[0].value +", " + sector[0].value + \
+                  ", " + exchange[0].value
+
+            file.write(row)
+            file.write("\n")
+
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+    file.close()
+
 
 if __name__ == "__main__":
     main()
