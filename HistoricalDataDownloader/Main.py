@@ -3,8 +3,7 @@ from yahoo_fin.stock_info import *
 import pandas as pd
 import requests
 from requests.exceptions import HTTPError
-from DataCleaner import nyse_cleaner, nasdaq_cleaner, \
-    gold_cleaner, oil_cleaner, merge_stock_data, crypto_cleaner, covid_cleaner
+from DataCleaner import *
 import json
 from jsonpath_ng import jsonpath, parse
 
@@ -20,8 +19,9 @@ def main():
     create_date_table()
     create_company_table()
     create_income_statement_table()
-    # generateYahooCallsForShareETL()
+    generate_yahoo_calls_for_share_ETL()
     covid_cleaner("covid.xlsx")
+    news_cleaner("news.csv")
 
 
 def tickers():
@@ -139,7 +139,7 @@ def oil_historical_data_download():
     oil_cleaner('Data/Oil/Oil.csv')
 
 
-def generateYahooCallsForShareETL():
+def generate_yahoo_calls_for_share_ETL():
     tickers_other = open("tickers.txt", 'r')
     tickers_nyse = open('nyse.txt', 'r')
     output = open("api_urls.txt", "a")
@@ -186,8 +186,10 @@ def create_company_table():
             zip_code = parse('$.quoteSummary.result[0].summaryProfile.zip').find(json_data)
             sector = parse('$.quoteSummary.result[0].summaryProfile.sector').find(json_data)
             exchange = parse('$.quoteSummary.result[0].price.exchangeName').find(json_data)
-            row = ticker[0].value + "," + name[0].value + "," + address[0].value + "," + city[0].value + "," + zip_code[
-                0].value + "," + sector[0].value + "," + exchange[0].value
+            row = ticker[0].value.replace(",", "") + "," + name[0].value.replace(",", "") + "," + address[
+                0].value.replace(",", "") + "," + city[0].value.replace(",", "") + "," + zip_code[
+                      0].value.replace(",", "") + "," + sector[0].value.replace(",", "") + "," + exchange[
+                      0].value.replace(",", "")
 
             file.write(row)
             file.write("\n")
@@ -255,6 +257,7 @@ def create_income_statement_table():
         except Exception as err:
             print(f'Other error occurred: {err}')
     file.close()
+
 
 if __name__ == "__main__":
     main()

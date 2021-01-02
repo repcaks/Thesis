@@ -1,4 +1,5 @@
-Scripts to collect data which is used in the project. Full data download and clean takes 2-3 hours. Program collects data in a csv format, but tables in Hive needs orc format (it is possible to use csv, but orc has a better performance). To get orc file run pyspark XXX.py script in Zeppelin.
+Scripts to collect data which is used in the project. Full data download and clean takes 2-3 hours. Program collects data in a csv format, but tables in Hive needs orc format (it is possible to use csv, but orc has a better performance). To get orc file run pyspark script in Zeppelin.
+
 
 "Data" directory--> paste this directory tree to project folder next to Main.py and DataCleaner
 
