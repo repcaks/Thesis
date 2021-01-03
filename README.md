@@ -28,11 +28,11 @@ Password: cloudera
 
 
 Overview:
-Implementation real time streaming use case from Twitter to Apache Hive using Spark Streaming, Apache Kafka and Apache Nifi
-Implementation ETL use case from REST Api (Yahoo finance) to Apache Hive using NiFi.
-Price prediction module using LSTM neural network in PySpark, keras, sklearn
-Data analytics using Tableau.
-Data analytics using apache Zeppelin, PySpark and Hive. 
+1) Implementation real time streaming use case from Twitter to Apache Hive using Spark Streaming, Apache Kafka and Apache Nifi
+2) Implementation ETL use case from REST Api (Yahoo finance) to Apache Hive using NiFi.
+3) Price prediction module using LSTM neural network in PySpark, keras, sklearn
+4) Data analytics using Tableau.
+5) Data analytics using apache Zeppelin, PySpark and Hive. 
 
 
 
