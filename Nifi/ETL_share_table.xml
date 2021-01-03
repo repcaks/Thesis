@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.2">
-    <description>Working
-</description>
+    <description></description>
     <groupId>afcf5f5f-0176-1000-ffff-ffffa140ed06</groupId>
     <name>ETL_share_table</name>
     <snippet>
@@ -260,7 +259,7 @@
             <parentGroupId>7ee8d79b-e176-3a64-0000-000000000000</parentGroupId>
             <position>
                 <x>642.8886996253059</x>
-                <y>238.6366124389491</y>
+                <y>215.90086414793348</y>
             </position>
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
@@ -699,7 +698,7 @@
                     </entry>
                     <entry>
                         <key>Replacement Value</key>
-                        <value>insert into stockexchange.etl_share values(from_unixtime(${date}, 'yyyy-MM-dd'),${open},${high},${low},${close},${adjclose},${volume},"${ticker}")</value>
+                        <value>insert into stockexchange.share values(from_unixtime(${date}, 'yyyy-MM-dd'),${open},${high},${low},${close},${adjclose},${volume},"${ticker}")</value>
                     </entry>
                     <entry>
                         <key>Character Set</key>
@@ -8668,5 +8667,5 @@ https://query1.finance.yahoo.com/v8/finance/chart/ZYME?symbol=ZYME&amp;interval=
             <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
         </processors>
     </snippet>
-    <timestamp>12/30/2020 22:14:27 UTC</timestamp>
+    <timestamp>01/03/2021 16:32:44 UTC</timestamp>
 </template>

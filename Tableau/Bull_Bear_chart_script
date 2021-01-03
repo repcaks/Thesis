@@ -1,0 +1,36 @@
+//Bear Window
+(WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]),0,364) - WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -364,0))/WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]),-364,0)<=-[Treshold]
+
+//Bear Window Index
+IF [Bear Window] THEN
+	IF [Bear Window] AND NOT(LOOKUP([Bear Window],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END
+END
+
+//Bear Window Size
+IF [Bear Window] THEN
+	IF [Bear Window] AND NOT(LOOKUP([Bear Window],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END
+END
+
+//Bear/Bull
+IF [Bear Window] THEN
+	IF WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -[Bear Window Index]+1, [Bear Window Size])=MAX([Close (StokExchangeHistory.csv)])
+		THEN "Bear"
+	ELSEIF WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]), -[Bear Window Index]+1, [Bear Window Size])=MAX([Close (StokExchangeHistory.csv)])
+		THEN "Bull"
+	END
+END
+
+//Bear/Bull Densified
+IF NOT ISNULL([Bear/Bull]) THEN [Bear/Bull] ELSE PREVIOUS_VALUE([Bear/Bull]) END
+
+//Linear/Log Close
+IF [Lin/Log Switcher] THEN MAX([Close]) ELSE LOG(MAX([Close])) END
+
+//Bear Values
+IF [Bear/Bull Densified]="Bear" THEN [Linear/Log Close] END
+
+
+//Trellis/Col 
+(index()-1)%(ROUND(SQRT(SIZE())))
+
+//Trellis/Row

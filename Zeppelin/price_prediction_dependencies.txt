@@ -1,0 +1,2 @@
+%dep
+z.load("/usr/hdp/3.0.1.0-187/hive_warehouse_connector/hive-warehouse-connector-assembly-1.0.0.3.0.1.0-187.jar")

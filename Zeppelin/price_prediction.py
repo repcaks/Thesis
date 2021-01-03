@@ -21,6 +21,7 @@ spark = SparkSession \
         .master("yarn") \
         .enableHiveSupport() \
         .config("spark.sql.hive.llap", "true") \
+        .config("spark.yarn.am.cores", "1") \
         .config("spark.datasource.hive.warehouse.exec.results.max","10000") \
         .config("spark.sql.hive.hiveserver2.jdbc.url","jdbc:hive2://sandbox-hdp.hortonworks.com:2181/default;password=hive;serviceDiscoveryMode=zooKeeper;user=hive;zooKeeperNamespace=hiveserver2") \
         .getOrCreate()
@@ -28,9 +29,12 @@ spark = SparkSession \
 hive = HiveWarehouseSession.session(spark).build()
 
 
+df = hive.execute("select * from stockexchange.share where ticker='AAPL' AND `date` > '2000-01-01'")
 
-df = hive.execute("select * from stockmarket.apple_stock")
+
+df = df.na.drop()
 df = df.withColumn('date', f.to_date('Date'))
+
 
 
 date_breakdown = ['year', 'month', 'day']
@@ -48,17 +52,10 @@ plt.ylabel('Stock Quote ($)')
 plt.show()
 
 df.toPandas().shape
-# df.dropna().count()
 
 
-
-# df.groupBy(['year']).agg({'adjclose':'count'})\
-# .withColumnRenamed('count(adjclose)', 'Row Count')\
-# .orderBy(["year"],ascending=False)\
-# .show()
-
-trainDF = df[df.year.between(2000, 2017)]
-testDF = df[df.year > 2017]
+trainDF = df[df.year.between(2000, 2018)]
+testDF = df[df.year > 2018]
 
 trainDF.toPandas().shape
 testDF.toPandas().shape
@@ -66,14 +63,14 @@ testDF.toPandas().shape
 trainDF_plot = trainDF.select('year', 'adjclose').toPandas()
 trainDF_plot.set_index('year', inplace=True)
 trainDF_plot.plot(figsize=(16, 6), grid=True)
-plt.title('Apple Stock 2000-2017')
+plt.title('Apple Stock 2000-2018')
 plt.ylabel('Stock Quote ($)')
 plt.show()
 
 testDF_plot = testDF.select('year', 'adjclose').toPandas()
 testDF_plot.set_index('year', inplace=True)
 testDF_plot.plot(figsize=(16, 6), grid=True)
-plt.title('Apple Stock 2017-2020')
+plt.title('Apple Stock 2018-2019')
 plt.ylabel('Stock Quote ($)')
 plt.show()
 
@@ -143,7 +140,7 @@ plt.figure(figsize=(16,6))
 plt.plot(combined_array[:,0],color='red', label='actual')
 plt.plot(combined_array[:,1],color='blue', label='predicted')
 plt.legend(loc = 'lower right')
-plt.title('2017 Actual vs. Predicted APPL Stock')
+plt.title('2018 Actual vs. Predicted APPL Stock')
 plt.xlabel('Days')
 plt.ylabel('Scaled Quotes')
 plt.show()

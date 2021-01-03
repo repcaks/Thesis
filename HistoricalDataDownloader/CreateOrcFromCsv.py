@@ -14,11 +14,10 @@ df1.printSchema()
 
 df1.write.save("/user/hive/tmp/data/shares.orc", format="orc")
 
-# News data has ";" as delimiter
-
+##################
 from pyspark.sql.functions import *
 
-df2 = spark.read.option("delimiter", ";").csv('file:///Data/news.csv')
+df2 = spark.read.csv('file:///Data/news.csv')
 
 df2.printSchema()
 df2.write.save("/user/hive/tmp/data/news.orc", format="orc")

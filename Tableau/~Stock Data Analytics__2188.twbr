@@ -1,0 +1,3164 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20204.20.1106.0321                               -->
+<workbook source-build='2020.4.0 (20204.20.1106.0321)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <ISO8601PeriodTypes />
+    <_.fcp.MarkAnimation.true...MarkAnimation />
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+    <_.fcp.SetMembershipControl.true...SetMembershipControl />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+    <ZoneBackgroundTransparency />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+    <color-palette custom='true' name='Stocks - Red-Green Diverging' type='ordered-diverging'>
+      <color>#f63538</color>
+      <color>#bf4045</color>
+      <color>#8b444e</color>
+      <color>#414554</color>
+      <color>#35764e</color>
+      <color>#2f9e4f</color>
+      <color>#30cc5a</color>
+    </color-palette>
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column alias='Log' caption='Lin/Log Switcher' datatype='boolean' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='false'>
+        <calculation class='tableau' formula='false' />
+        <aliases>
+          <alias key='false' value='Log' />
+          <alias key='true' value='Linear' />
+        </aliases>
+        <members>
+          <member alias='Linear' value='true' />
+          <member alias='Log' value='false' />
+        </members>
+      </column>
+      <column caption='Treshold' datatype='real' name='[Parameter 2]' param-domain-type='range' role='measure' type='quantitative' value='0.2'>
+        <calculation class='tableau' formula='0.2' />
+        <range granularity='0.001' max='0.22' min='0.18' />
+      </column>
+    </datasource>
+    <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' inline='true' name='federated.11cnzon1q1xlc114ybf3j12kicml' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='companies' name='textscan.1obfeld165ttx21aoobiw17q8xxt'>
+            <connection class='textscan' directory='C:/Users/mucha/Desktop/Data' filename='companies.csv' password='' port='0' server='' />
+          </named-connection>
+          <named-connection caption='marketcap' name='textscan.1c3u5qr0q7cx2914v5ja11rcgind'>
+            <connection class='textscan' cleaning='yes' compat='no' csvFile='C:/Users/mucha/Desktop/Data/marketcap.csv' dataRefreshTime='' directory='C:/Users/mucha/Desktop/Data' filename='C:/Users/mucha/AppData/Local/Temp/TableauTemp/0elyts20x93h5515ypz4u05psmh3/marketcap.csv.xlsx' interpretationMode='8' password='' port='0' server='' validate='no' />
+          </named-connection>
+          <named-connection caption='news' name='textscan.1qw2je40x9pzcq11psfds18vuhyt'>
+            <connection class='textscan' directory='C:/Users/mucha/Desktop/Data' filename='news.csv' password='' port='0' server='' />
+          </named-connection>
+        </named-connections>
+        <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Crypto.csv' table='[Crypto#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='date' name='Date' ordinal='0' />
+            <column datatype='real' name='Open' ordinal='1' />
+            <column datatype='real' name='High' ordinal='2' />
+            <column datatype='real' name='Low' ordinal='3' />
+            <column datatype='real' name='Close' ordinal='4' />
+            <column datatype='real' name='Adjclose' ordinal='5' />
+            <column datatype='real' name='Volume' ordinal='6' />
+            <column datatype='string' name='Ticker' ordinal='7' />
+          </columns>
+        </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...relation type='collection'>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='shares.csv' table='[C:\Users\mucha\Desktop\Data\shares#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='Date' ordinal='0' />
+              <column datatype='real' name='Open' ordinal='1' />
+              <column datatype='real' name='High' ordinal='2' />
+              <column datatype='real' name='Low' ordinal='3' />
+              <column datatype='real' name='Close' ordinal='4' />
+              <column datatype='real' name='Adjclose' ordinal='5' />
+              <column datatype='real' name='Volume' ordinal='6' />
+              <column datatype='string' name='Ticker' ordinal='7' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1qw2je40x9pzcq11psfds18vuhyt' name='Dates.csv' table='[Dates#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='integer' name='Id' ordinal='0' />
+              <column datatype='date' name='Date' ordinal='1' />
+              <column datatype='integer' name='Day' ordinal='2' />
+              <column datatype='integer' name='Week' ordinal='3' />
+              <column datatype='integer' name='Month' ordinal='4' />
+              <column datatype='integer' name='Quarter' ordinal='5' />
+              <column datatype='integer' name='Year' ordinal='6' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Crypto.csv' table='[Crypto#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='Date' ordinal='0' />
+              <column datatype='real' name='Open' ordinal='1' />
+              <column datatype='real' name='High' ordinal='2' />
+              <column datatype='real' name='Low' ordinal='3' />
+              <column datatype='real' name='Close' ordinal='4' />
+              <column datatype='real' name='Adjclose' ordinal='5' />
+              <column datatype='real' name='Volume' ordinal='6' />
+              <column datatype='string' name='Ticker' ordinal='7' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Gold.csv' table='[Gold#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='Date' ordinal='0' />
+              <column datatype='real' name='Open' ordinal='1' />
+              <column datatype='real' name='High' ordinal='2' />
+              <column datatype='real' name='Low' ordinal='3' />
+              <column datatype='real' name='Close' ordinal='4' />
+              <column datatype='real' name='Adjclose' ordinal='5' />
+              <column datatype='real' name='Volume' ordinal='6' />
+              <column datatype='string' name='Ticker' ordinal='7' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Oil.csv' table='[Oil#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='Date' ordinal='0' />
+              <column datatype='real' name='Open' ordinal='1' />
+              <column datatype='real' name='High' ordinal='2' />
+              <column datatype='real' name='Low' ordinal='3' />
+              <column datatype='real' name='Close' ordinal='4' />
+              <column datatype='real' name='Adjclose' ordinal='5' />
+              <column datatype='real' name='Volume' ordinal='6' />
+              <column datatype='string' name='Ticker' ordinal='7' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1qw2je40x9pzcq11psfds18vuhyt' name='news.csv' table='[news#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='topic' ordinal='0' />
+              <column datatype='string' name='link' ordinal='1' />
+              <column datatype='string' name='domain' ordinal='2' />
+              <column datatype='date' name='published_date' ordinal='3' />
+              <column datatype='string' name='title' ordinal='4' />
+              <column datatype='string' name='lang' ordinal='5' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1c3u5qr0q7cx2914v5ja11rcgind' name='StokExchangeHistory.csv' table='[StokExchangeHistory#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='date' name='Date' ordinal='0' />
+              <column datatype='real' name='Open' ordinal='1' />
+              <column datatype='real' name='High' ordinal='2' />
+              <column datatype='real' name='Low' ordinal='3' />
+              <column datatype='real' name='Close' ordinal='4' />
+              <column datatype='real' name='Adj Close' ordinal='5' />
+              <column datatype='integer' name='Volume' ordinal='6' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='companies.csv' table='[C:\Users\mucha\Desktop\Data\companies#csv]' type='table'>
+            <columns character-set='windows-1252' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='Ticker' ordinal='0' />
+              <column datatype='string' name='Name' ordinal='1' />
+              <column datatype='string' name='Address' ordinal='2' />
+              <column datatype='string' name='City' ordinal='3' />
+              <column datatype='string' name='Zip' ordinal='4' />
+              <column datatype='string' name='Sector' ordinal='5' />
+              <column datatype='string' name='Exchange' ordinal='6' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='incomeStatements.csv' table='[C:\Users\mucha\Desktop\Data\incomeStatements#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='Ticker' ordinal='0' />
+              <column datatype='date' name='date' ordinal='1' />
+              <column datatype='integer' name='totalRevenue' ordinal='2' />
+              <column datatype='integer' name='costOfRevenue' ordinal='3' />
+              <column datatype='integer' name='grossProfit' ordinal='4' />
+              <column datatype='integer' name='netIncome' ordinal='5' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1c3u5qr0q7cx2914v5ja11rcgind' name='marketcap.csv' table='[C:\Users\mucha\Desktop\Data\marketcap#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='Symbol' ordinal='0' />
+              <column datatype='string' name='Name' ordinal='1' />
+              <column datatype='string' name='Last Sale' ordinal='2' />
+              <column datatype='real' name='Net Change' ordinal='3' />
+              <column datatype='real' name='% Change' ordinal='4' />
+              <column datatype='real' name='Market Cap' ordinal='5' />
+              <column datatype='string' name='Country' ordinal='6' />
+              <column datatype='integer' name='IPO Year' ordinal='7' />
+              <column datatype='integer' name='Volume' ordinal='8' />
+              <column datatype='string' name='Sector' ordinal='9' />
+              <column datatype='string' name='Industry' ordinal='10' />
+            </columns>
+          </relation>
+        </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+        <cols>
+          <map key='[% Change]' value='[marketcap.csv].[% Change]' />
+          <map key='[Address]' value='[companies.csv].[Address]' />
+          <map key='[Adj Close]' value='[StokExchangeHistory.csv].[Adj Close]' />
+          <map key='[Adjclose (Crypto.csv)]' value='[Crypto.csv].[Adjclose]' />
+          <map key='[Adjclose (Gold.csv)]' value='[Gold.csv].[Adjclose]' />
+          <map key='[Adjclose (Oil.csv)]' value='[Oil.csv].[Adjclose]' />
+          <map key='[Adjclose]' value='[shares.csv].[Adjclose]' />
+          <map key='[City]' value='[companies.csv].[City]' />
+          <map key='[Close (Crypto.csv)]' value='[Crypto.csv].[Close]' />
+          <map key='[Close (Gold.csv)]' value='[Gold.csv].[Close]' />
+          <map key='[Close (Oil.csv)]' value='[Oil.csv].[Close]' />
+          <map key='[Close (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[Close]' />
+          <map key='[Close]' value='[shares.csv].[Close]' />
+          <map key='[Country]' value='[marketcap.csv].[Country]' />
+          <map key='[Date (Crypto.csv)]' value='[Crypto.csv].[Date]' />
+          <map key='[Date (Dates.csv)]' value='[Dates.csv].[Date]' />
+          <map key='[Date (Gold.csv)]' value='[Gold.csv].[Date]' />
+          <map key='[Date (Oil.csv)]' value='[Oil.csv].[Date]' />
+          <map key='[Date (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[Date]' />
+          <map key='[Date]' value='[shares.csv].[Date]' />
+          <map key='[Day]' value='[Dates.csv].[Day]' />
+          <map key='[Exchange]' value='[companies.csv].[Exchange]' />
+          <map key='[High (Crypto.csv)]' value='[Crypto.csv].[High]' />
+          <map key='[High (Gold.csv)]' value='[Gold.csv].[High]' />
+          <map key='[High (Oil.csv)]' value='[Oil.csv].[High]' />
+          <map key='[High (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[High]' />
+          <map key='[High]' value='[shares.csv].[High]' />
+          <map key='[IPO Year]' value='[marketcap.csv].[IPO Year]' />
+          <map key='[Id]' value='[Dates.csv].[Id]' />
+          <map key='[Industry]' value='[marketcap.csv].[Industry]' />
+          <map key='[Last Sale]' value='[marketcap.csv].[Last Sale]' />
+          <map key='[Low (Crypto.csv)]' value='[Crypto.csv].[Low]' />
+          <map key='[Low (Gold.csv)]' value='[Gold.csv].[Low]' />
+          <map key='[Low (Oil.csv)]' value='[Oil.csv].[Low]' />
+          <map key='[Low (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[Low]' />
+          <map key='[Low]' value='[shares.csv].[Low]' />
+          <map key='[Market Cap]' value='[marketcap.csv].[Market Cap]' />
+          <map key='[Month]' value='[Dates.csv].[Month]' />
+          <map key='[Name (marketcap.csv)]' value='[marketcap.csv].[Name]' />
+          <map key='[Name]' value='[companies.csv].[Name]' />
+          <map key='[Net Change]' value='[marketcap.csv].[Net Change]' />
+          <map key='[Open (Crypto.csv)]' value='[Crypto.csv].[Open]' />
+          <map key='[Open (Gold.csv)]' value='[Gold.csv].[Open]' />
+          <map key='[Open (Oil.csv)]' value='[Oil.csv].[Open]' />
+          <map key='[Open (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[Open]' />
+          <map key='[Open]' value='[shares.csv].[Open]' />
+          <map key='[Quarter]' value='[Dates.csv].[Quarter]' />
+          <map key='[Sector (marketcap.csv)]' value='[marketcap.csv].[Sector]' />
+          <map key='[Sector]' value='[companies.csv].[Sector]' />
+          <map key='[Symbol]' value='[marketcap.csv].[Symbol]' />
+          <map key='[Ticker (Crypto.csv)]' value='[Crypto.csv].[Ticker]' />
+          <map key='[Ticker (Gold.csv)]' value='[Gold.csv].[Ticker]' />
+          <map key='[Ticker (Oil.csv)]' value='[Oil.csv].[Ticker]' />
+          <map key='[Ticker (companies.csv)]' value='[companies.csv].[Ticker]' />
+          <map key='[Ticker (incomeStatements.csv)]' value='[incomeStatements.csv].[Ticker]' />
+          <map key='[Ticker]' value='[shares.csv].[Ticker]' />
+          <map key='[Volume (Crypto.csv)]' value='[Crypto.csv].[Volume]' />
+          <map key='[Volume (Gold.csv)]' value='[Gold.csv].[Volume]' />
+          <map key='[Volume (Oil.csv)]' value='[Oil.csv].[Volume]' />
+          <map key='[Volume (StokExchangeHistory.csv)]' value='[StokExchangeHistory.csv].[Volume]' />
+          <map key='[Volume (marketcap.csv)]' value='[marketcap.csv].[Volume]' />
+          <map key='[Volume]' value='[shares.csv].[Volume]' />
+          <map key='[Week]' value='[Dates.csv].[Week]' />
+          <map key='[Year]' value='[Dates.csv].[Year]' />
+          <map key='[Zip]' value='[companies.csv].[Zip]' />
+          <map key='[costOfRevenue]' value='[incomeStatements.csv].[costOfRevenue]' />
+          <map key='[date]' value='[incomeStatements.csv].[date]' />
+          <map key='[domain]' value='[news.csv].[domain]' />
+          <map key='[grossProfit]' value='[incomeStatements.csv].[grossProfit]' />
+          <map key='[lang]' value='[news.csv].[lang]' />
+          <map key='[link]' value='[news.csv].[link]' />
+          <map key='[netIncome]' value='[incomeStatements.csv].[netIncome]' />
+          <map key='[published_date]' value='[news.csv].[published_date]' />
+          <map key='[title]' value='[news.csv].[title]' />
+          <map key='[topic]' value='[news.csv].[topic]' />
+          <map key='[totalRevenue]' value='[incomeStatements.csv].[totalRevenue]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;windows-1252&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Open]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Open</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[High]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>High</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Low]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Low</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Close]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Close</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Adjclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Adjclose]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Adjclose</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Volume]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker]</local-name>
+            <parent-name>[shares.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[shares.csv_893425C9C75E444E83D09AF94130C88B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Id</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Id]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Id</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date (Dates.csv)]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Day</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Day]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Day</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Week</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Week]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Week</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Month</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Month]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Month</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Quarter</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Quarter]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Quarter</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Year]</local-name>
+            <parent-name>[Dates.csv]</parent-name>
+            <remote-alias>Year</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Open (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Open</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[High (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>High</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Low (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Low</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Close (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Close</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Adjclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Adjclose (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Adjclose</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Volume (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker (Crypto.csv)]</local-name>
+            <parent-name>[Crypto.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Open (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Open</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[High (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>High</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Low (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Low</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Close (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Close</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Adjclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Adjclose (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Adjclose</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Volume (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker (Gold.csv)]</local-name>
+            <parent-name>[Gold.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Open (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Open</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[High (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>High</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Low (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Low</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Close (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Close</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Adjclose</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Adjclose (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Adjclose</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Volume (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker (Oil.csv)]</local-name>
+            <parent-name>[Oil.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>topic</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[topic]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>topic</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>link</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[link]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>link</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>domain</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[domain]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>domain</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>published_date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[published_date]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>published_date</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>title</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[title]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>title</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>lang</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[lang]</local-name>
+            <parent-name>[news.csv]</parent-name>
+            <remote-alias>lang</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[news.csv_205CD6D664964FF79AEEE7D3E300E945]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[Date (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Open</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Open (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Open</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>High</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[High (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>High</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Low</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Low (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Low</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Close (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Close</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Adj Close</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Adj Close]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Adj Close</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Volume (StokExchangeHistory.csv)]</local-name>
+            <parent-name>[StokExchangeHistory.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker (companies.csv)]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Name</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Address</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Address]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Address</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>City</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[City]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>City</remote-alias>
+            <ordinal>55</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Zip</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Zip]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Zip</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Sector</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Sector]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Sector</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Exchange</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Exchange]</local-name>
+            <parent-name>[companies.csv]</parent-name>
+            <remote-alias>Exchange</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ticker</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Ticker (incomeStatements.csv)]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>Ticker</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>date</remote-name>
+            <remote-type>133</remote-type>
+            <local-name>[date]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>date</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>totalRevenue</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[totalRevenue]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>totalRevenue</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>costOfRevenue</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[costOfRevenue]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>costOfRevenue</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>grossProfit</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[grossProfit]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>grossProfit</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>netIncome</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[netIncome]</local-name>
+            <parent-name>[incomeStatements.csv]</parent-name>
+            <remote-alias>netIncome</remote-alias>
+            <ordinal>64</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Symbol</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Symbol]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Symbol</remote-alias>
+            <ordinal>65</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name (marketcap.csv)]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Name</remote-alias>
+            <ordinal>66</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Last Sale</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Last Sale]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Last Sale</remote-alias>
+            <ordinal>67</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Net Change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Net Change]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Net Change</remote-alias>
+            <ordinal>68</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>% Change</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[% Change]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>% Change</remote-alias>
+            <ordinal>69</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Market Cap</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Market Cap]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Market Cap</remote-alias>
+            <ordinal>70</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Country</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Country]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Country</remote-alias>
+            <ordinal>71</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>IPO Year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[IPO Year]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>IPO Year</remote-alias>
+            <ordinal>72</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Volume</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Volume (marketcap.csv)]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Volume</remote-alias>
+            <ordinal>73</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Sector</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Sector (marketcap.csv)]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Sector</remote-alias>
+            <ordinal>74</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Industry</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Industry]</local-name>
+            <parent-name>[marketcap.csv]</parent-name>
+            <remote-alias>Industry</remote-alias>
+            <ordinal>75</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='real' name='[% Change]' role='measure' type='quantitative' />
+      <column datatype='string' name='[:Measure Names]' role='dimension' type='nominal'>
+        <aliases>
+          <alias key='&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]&quot;' value='Bull Market' />
+          <alias key='&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:6]&quot;' value='Bear Market' />
+        </aliases>
+      </column>
+      <column caption='Last 2 days Index' datatype='integer' name='[Calculation_108086456014057472]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='INDEX()'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Bear Window' datatype='boolean' name='[Calculation_1475210417621200912]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Bear Window&#13;&#10;(WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]),0,364) - WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -364,0))/WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]),-364,0)&lt;=-[Parameters].[Parameter 2]'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Bear Window Index' datatype='integer' name='[Calculation_1475210417621229585]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='//Bear Window Index&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF [Calculation_1475210417621200912] AND NOT(LOOKUP([Calculation_1475210417621200912],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END&#13;&#10;END&#13;&#10;'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Bear Window Size' datatype='integer' name='[Calculation_1475210417621245970]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='//Bear Window Size&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF [Calculation_1475210417621200912] AND NOT(LOOKUP([Calculation_1475210417621200912],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END&#13;&#10;END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Bear/Bull' datatype='string' name='[Calculation_1475210417621340180]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Bear/Bull&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -[Calculation_1475210417621229585]+1, [Calculation_1475210417621245970])=MAX([Close (StokExchangeHistory.csv)])&#13;&#10;&#9;&#9;THEN &quot;Bear&quot;&#13;&#10;&#9;ELSEIF WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]), -[Calculation_1475210417621229585]+1, [Calculation_1475210417621245970])=MAX([Close (StokExchangeHistory.csv)])&#13;&#10;&#9;&#9;THEN &quot;Bull&quot;&#13;&#10;&#9;END&#13;&#10;END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Bear/Bull Densified' datatype='string' name='[Calculation_1475210417622179862]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='//Bear/Bull Densified&#13;&#10;IF NOT ISNULL([Calculation_1475210417621340180]) THEN [Calculation_1475210417621340180] ELSE PREVIOUS_VALUE([Calculation_1475210417621340180]) END&#13;&#10;'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Linear/Log Close' datatype='real' name='[Calculation_1475210417622196247]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='//Linear/Log Close&#13;&#10;IF [Parameters].[Parameter 1] THEN MAX([Close (StokExchangeHistory.csv)]) ELSE LOG(MAX([Close (StokExchangeHistory.csv)])) END' />
+      </column>
+      <column caption='Bear Values' datatype='real' name='[Calculation_1475210417634783259]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_1475210417622179862]=&quot;Bear&quot; THEN [Calculation_1475210417622196247] END'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Trellis/Col' datatype='real' name='[Calculation_1475210417643237405]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='(index()-1)%(ROUND(SQRT(SIZE())))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='Trellis/Row' datatype='integer' name='[Calculation_1475210417644675102]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='int( (index()-1)/(round(sqrt(size()))))'>
+          <table-calc ordering-type='Rows' />
+        </calculation>
+      </column>
+      <column caption='High low' datatype='real' name='[Calculation_1475210417654870047]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Low])-SUM([High])' />
+      </column>
+      <column caption='Open Close Diff' datatype='real' name='[Calculation_1475210417655091232]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([Close])-SUM([Open])' />
+      </column>
+      <column datatype='string' name='[City]' role='dimension' semantic-role='[City].[Name]' type='nominal' />
+      <column datatype='real' name='[Close (Crypto.csv)]' role='measure' type='quantitative' />
+      <column datatype='real' name='[Close]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='date' name='[Date (StokExchangeHistory.csv)]' role='dimension' type='ordinal' />
+      <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[Day]' role='dimension' type='quantitative' />
+      <column datatype='real' name='[High]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[IPO Year]' role='dimension' type='quantitative' />
+      <column datatype='integer' name='[Id]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[Month]' role='dimension' type='quantitative' />
+      <column datatype='real' name='[Open]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Quarter]' role='dimension' type='quantitative' />
+      <column datatype='string' name='[Sector]' role='dimension' type='nominal' />
+      <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Week]' role='dimension' type='quantitative' />
+      <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+      <column datatype='string' name='[Zip]' role='dimension' semantic-role='[ZipCode].[Name]' type='nominal' />
+      <_.fcp.ObjectModelTableType.true...column caption='Crypto.csv' datatype='table' name='[__tableau_internal_object_id__].[Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='Dates.csv' datatype='table' name='[__tableau_internal_object_id__].[Dates.csv_326AE527D9A54021A7DDC55A21BB7439]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='Gold.csv' datatype='table' name='[__tableau_internal_object_id__].[Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='Oil.csv' datatype='table' name='[__tableau_internal_object_id__].[Oil.csv_5F90F9453E764D26AD79EAACEF83C771]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='StokExchangeHistory.csv' datatype='table' name='[__tableau_internal_object_id__].[StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='companies.csv' datatype='table' name='[__tableau_internal_object_id__].[companies.csv_947D04A0563D4EBBB142810BBF2C7D3B]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='incomeStatements.csv' datatype='table' name='[__tableau_internal_object_id__].[incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='marketcap.csv' datatype='table' name='[__tableau_internal_object_id__].[marketcap.csv_D3005C5B758E4400A4B48413574EBA7F]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='news.csv' datatype='table' name='[__tableau_internal_object_id__].[news.csv_205CD6D664964FF79AEEE7D3E300E945]' role='measure' type='quantitative' />
+      <_.fcp.ObjectModelTableType.true...column caption='shares.csv' datatype='table' name='[__tableau_internal_object_id__].[shares.csv_893425C9C75E444E83D09AF94130C88B]' role='measure' type='quantitative' />
+      <column caption='Cost Of Revenue' datatype='integer' name='[costOfRevenue]' role='measure' type='quantitative' />
+      <column caption='Date1' datatype='date' name='[date]' role='dimension' type='ordinal' />
+      <column caption='Domain' datatype='string' name='[domain]' role='dimension' type='nominal' />
+      <column caption='Gross Profit' datatype='integer' name='[grossProfit]' role='measure' type='quantitative' />
+      <column caption='Lang' datatype='string' name='[lang]' role='dimension' type='nominal' />
+      <column caption='Link' datatype='string' name='[link]' role='dimension' type='nominal' />
+      <column caption='Net Income' datatype='integer' name='[netIncome]' role='measure' type='quantitative' />
+      <column caption='Published Date' datatype='date' name='[published_date]' role='dimension' type='ordinal' />
+      <column caption='Title' datatype='string' name='[title]' role='dimension' type='nominal' />
+      <column caption='Topic' datatype='string' name='[topic]' role='dimension' type='nominal' />
+      <column caption='Total Revenue' datatype='integer' name='[totalRevenue]' role='measure' type='quantitative' />
+      <column-instance column='[Date (StokExchangeHistory.csv)]' derivation='Count' name='[cnt:Date (StokExchangeHistory.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Date (StokExchangeHistory.csv)]' derivation='Min' name='[min:Date (StokExchangeHistory.csv):ok]' pivot='key' type='ordinal' />
+      <column-instance column='[Date (StokExchangeHistory.csv)]' derivation='None' name='[none:Date (StokExchangeHistory.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Forecast Indicator]' derivation='None' forecast-column-base='[Forecast Indicator]' forecast-column-type='forecast-indicator' name='[none:Forecast Indicator:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Sector]' derivation='None' name='[none:Sector:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+      <column-instance column='[date]' derivation='Quarter' name='[qr:date:ok]' pivot='key' type='ordinal' />
+      <column-instance column='[% Change]' derivation='Sum' name='[sum:% Change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Close (Crypto.csv)]' derivation='Sum' name='[sum:Close (Crypto.csv):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Close]' derivation='Sum' name='[sum:Close:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[High]' derivation='Sum' name='[sum:High:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Open]' derivation='Sum' name='[sum:Open:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1475210417622196247]' derivation='User' name='[usr:Calculation_1475210417622196247:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:2]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' ordering-type='Field' />
+      </column-instance>
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:3]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Field'>
+          <order field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' />
+          <sort direction='ASC' using='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:% Change:qk]' />
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:4]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Field'>
+          <order field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' />
+          <sort direction='ASC' using='[federated.11cnzon1q1xlc114ybf3j12kicml].[cnt:Date (StokExchangeHistory.csv):qk]' />
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:5]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Field'>
+          <order field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' />
+          <sort direction='ASC' using='[federated.11cnzon1q1xlc114ybf3j12kicml].[min:Date (StokExchangeHistory.csv):ok]' />
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:6]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Field'>
+          <order field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' />
+          <sort direction='DESC' using='[federated.11cnzon1q1xlc114ybf3j12kicml].[min:Date (StokExchangeHistory.csv):ok]' />
+        </table-calc>
+      </column-instance>
+      <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk]' pivot='key' type='quantitative'>
+        <table-calc ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+        <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Rows' />
+      </column-instance>
+      <column-instance column='[date]' derivation='Year' name='[yr:date:ok]' pivot='key' type='ordinal' />
+      <group caption='Last 2 dates' name='[Date Set]' name-style='unqualified' user:ui-builder='filter-group'>
+        <groupfilter count='2' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+          <groupfilter direction='DESC' expression='MAX([Date])' function='order' user:ui-marker='order'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[Date]' member='#2020-01-09#' />
+              <groupfilter function='member' level='[Date]' member='#2020-01-10#' />
+              <groupfilter function='member' level='[Date]' member='#2020-12-23#' />
+              <groupfilter function='member' level='[Date]' member='#2020-12-24#' />
+            </groupfilter>
+          </groupfilter>
+        </groupfilter>
+      </group>
+      <group hidden='true' name='[Exclusions (Date,Sector,Ticker)]' name-style='unqualified' user:auto-column='exclude'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[none:Date:qk]' />
+          <groupfilter function='level-members' level='[none:Sector:nk]' />
+          <groupfilter function='level-members' level='[none:Ticker:nk]' />
+        </groupfilter>
+      </group>
+      <drill-paths>
+        <drill-path name='Country, City'>
+          <field>[Country]</field>
+          <field>[City]</field>
+        </drill-path>
+      </drill-paths>
+      <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' _.fcp.SchemaViewerObjectModel.true...common-percentage='0.944737' _.fcp.SchemaViewerObjectModel.true...user-set-layout-v2='true' dim-ordering='alphabetic' measure-ordering='alphabetic' parameter-percentage='0.0552632' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[yr:date:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>2009</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>2017</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>2015</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>2019</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>2014</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>2018</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2010</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>2020</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Forecast Indicator:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;Actual&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;Estimate&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[qr:date:ok]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>2009</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>2017</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>4</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>2015</bucket>
+            </map>
+            <map to='#9c755f'>
+              <bucket>1</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>2019</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>2</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>3</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>2014</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>2018</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>2010</bucket>
+            </map>
+            <map to='#ff9da7'>
+              <bucket>2020</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[:Measure Names]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close:qk]&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417629855769:qk]&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:2]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:3]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:4]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:5]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:6]&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk]&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Open:qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close (Crypto.csv):qk]&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417629720600:qk]&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Poland&quot;' />
+      </semantic-values>
+      <default-sorts>
+        <manual-sort column='[none:Forecast Indicator:nk]' direction='ASC'>
+          <dictionary>
+            <bucket>&quot;Actual&quot;</bucket>
+            <bucket>&quot;Estimate&quot;</bucket>
+          </dictionary>
+        </manual-sort>
+      </default-sorts>
+      <datasource-dependencies datasource='Parameters'>
+        <column alias='Log' caption='Lin/Log Switcher' datatype='boolean' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='false'>
+          <calculation class='tableau' formula='false' />
+          <aliases>
+            <alias key='false' value='Log' />
+            <alias key='true' value='Linear' />
+          </aliases>
+        </column>
+        <column caption='Treshold' datatype='real' name='[Parameter 2]' param-domain-type='range' role='measure' type='quantitative' value='0.2'>
+          <calculation class='tableau' formula='0.2' />
+          <range granularity='0.001' max='0.22' min='0.18' />
+        </column>
+      </datasource-dependencies>
+      <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+        <objects>
+          <object caption='Crypto.csv' id='Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Crypto.csv' table='[Crypto#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='Date' ordinal='0' />
+                  <column datatype='real' name='Open' ordinal='1' />
+                  <column datatype='real' name='High' ordinal='2' />
+                  <column datatype='real' name='Low' ordinal='3' />
+                  <column datatype='real' name='Close' ordinal='4' />
+                  <column datatype='real' name='Adjclose' ordinal='5' />
+                  <column datatype='real' name='Volume' ordinal='6' />
+                  <column datatype='string' name='Ticker' ordinal='7' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='Dates.csv' id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439'>
+            <properties context=''>
+              <relation connection='textscan.1qw2je40x9pzcq11psfds18vuhyt' name='Dates.csv' table='[Dates#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='integer' name='Id' ordinal='0' />
+                  <column datatype='date' name='Date' ordinal='1' />
+                  <column datatype='integer' name='Day' ordinal='2' />
+                  <column datatype='integer' name='Week' ordinal='3' />
+                  <column datatype='integer' name='Month' ordinal='4' />
+                  <column datatype='integer' name='Quarter' ordinal='5' />
+                  <column datatype='integer' name='Year' ordinal='6' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='Gold.csv' id='Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Gold.csv' table='[Gold#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='Date' ordinal='0' />
+                  <column datatype='real' name='Open' ordinal='1' />
+                  <column datatype='real' name='High' ordinal='2' />
+                  <column datatype='real' name='Low' ordinal='3' />
+                  <column datatype='real' name='Close' ordinal='4' />
+                  <column datatype='real' name='Adjclose' ordinal='5' />
+                  <column datatype='real' name='Volume' ordinal='6' />
+                  <column datatype='string' name='Ticker' ordinal='7' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='Oil.csv' id='Oil.csv_5F90F9453E764D26AD79EAACEF83C771'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='Oil.csv' table='[Oil#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='Date' ordinal='0' />
+                  <column datatype='real' name='Open' ordinal='1' />
+                  <column datatype='real' name='High' ordinal='2' />
+                  <column datatype='real' name='Low' ordinal='3' />
+                  <column datatype='real' name='Close' ordinal='4' />
+                  <column datatype='real' name='Adjclose' ordinal='5' />
+                  <column datatype='real' name='Volume' ordinal='6' />
+                  <column datatype='string' name='Ticker' ordinal='7' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='StokExchangeHistory.csv' id='StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B'>
+            <properties context=''>
+              <relation connection='textscan.1c3u5qr0q7cx2914v5ja11rcgind' name='StokExchangeHistory.csv' table='[StokExchangeHistory#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='Date' ordinal='0' />
+                  <column datatype='real' name='Open' ordinal='1' />
+                  <column datatype='real' name='High' ordinal='2' />
+                  <column datatype='real' name='Low' ordinal='3' />
+                  <column datatype='real' name='Close' ordinal='4' />
+                  <column datatype='real' name='Adj Close' ordinal='5' />
+                  <column datatype='integer' name='Volume' ordinal='6' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='companies.csv' id='companies.csv_947D04A0563D4EBBB142810BBF2C7D3B'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='companies.csv' table='[C:\Users\mucha\Desktop\Data\companies#csv]' type='table'>
+                <columns character-set='windows-1252' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='Ticker' ordinal='0' />
+                  <column datatype='string' name='Name' ordinal='1' />
+                  <column datatype='string' name='Address' ordinal='2' />
+                  <column datatype='string' name='City' ordinal='3' />
+                  <column datatype='string' name='Zip' ordinal='4' />
+                  <column datatype='string' name='Sector' ordinal='5' />
+                  <column datatype='string' name='Exchange' ordinal='6' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='incomeStatements.csv' id='incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='incomeStatements.csv' table='[C:\Users\mucha\Desktop\Data\incomeStatements#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='Ticker' ordinal='0' />
+                  <column datatype='date' name='date' ordinal='1' />
+                  <column datatype='integer' name='totalRevenue' ordinal='2' />
+                  <column datatype='integer' name='costOfRevenue' ordinal='3' />
+                  <column datatype='integer' name='grossProfit' ordinal='4' />
+                  <column datatype='integer' name='netIncome' ordinal='5' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='marketcap.csv' id='marketcap.csv_D3005C5B758E4400A4B48413574EBA7F'>
+            <properties context=''>
+              <relation connection='textscan.1c3u5qr0q7cx2914v5ja11rcgind' name='marketcap.csv' table='[C:\Users\mucha\Desktop\Data\marketcap#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='Symbol' ordinal='0' />
+                  <column datatype='string' name='Name' ordinal='1' />
+                  <column datatype='string' name='Last Sale' ordinal='2' />
+                  <column datatype='real' name='Net Change' ordinal='3' />
+                  <column datatype='real' name='% Change' ordinal='4' />
+                  <column datatype='real' name='Market Cap' ordinal='5' />
+                  <column datatype='string' name='Country' ordinal='6' />
+                  <column datatype='integer' name='IPO Year' ordinal='7' />
+                  <column datatype='integer' name='Volume' ordinal='8' />
+                  <column datatype='string' name='Sector' ordinal='9' />
+                  <column datatype='string' name='Industry' ordinal='10' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='news.csv' id='news.csv_205CD6D664964FF79AEEE7D3E300E945'>
+            <properties context=''>
+              <relation connection='textscan.1qw2je40x9pzcq11psfds18vuhyt' name='news.csv' table='[news#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='topic' ordinal='0' />
+                  <column datatype='string' name='link' ordinal='1' />
+                  <column datatype='string' name='domain' ordinal='2' />
+                  <column datatype='date' name='published_date' ordinal='3' />
+                  <column datatype='string' name='title' ordinal='4' />
+                  <column datatype='string' name='lang' ordinal='5' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='shares.csv' id='shares.csv_893425C9C75E444E83D09AF94130C88B'>
+            <properties context=''>
+              <relation connection='textscan.1obfeld165ttx21aoobiw17q8xxt' name='shares.csv' table='[C:\Users\mucha\Desktop\Data\shares#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='date' name='Date' ordinal='0' />
+                  <column datatype='real' name='Open' ordinal='1' />
+                  <column datatype='real' name='High' ordinal='2' />
+                  <column datatype='real' name='Low' ordinal='3' />
+                  <column datatype='real' name='Close' ordinal='4' />
+                  <column datatype='real' name='Adjclose' ordinal='5' />
+                  <column datatype='real' name='Volume' ordinal='6' />
+                  <column datatype='string' name='Ticker' ordinal='7' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date (Dates.csv)]' />
+              <expression op='[Date (Crypto.csv)]' />
+            </expression>
+            <first-end-point object-id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439' />
+            <second-end-point object-id='Crypto.csv_F71D62A3C77B4B92AA15DDDF4DD55BF8' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date]' />
+              <expression op='[Date (Dates.csv)]' />
+            </expression>
+            <first-end-point object-id='shares.csv_893425C9C75E444E83D09AF94130C88B' />
+            <second-end-point object-id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date (Dates.csv)]' />
+              <expression op='[Date (Gold.csv)]' />
+            </expression>
+            <first-end-point object-id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439' />
+            <second-end-point object-id='Gold.csv_6CBD0F8E5CC04716A2BE3A64ABC2A58D' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date (Dates.csv)]' />
+              <expression op='[Date (Oil.csv)]' />
+            </expression>
+            <first-end-point object-id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439' />
+            <second-end-point object-id='Oil.csv_5F90F9453E764D26AD79EAACEF83C771' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date]' />
+              <expression op='[Date (StokExchangeHistory.csv)]' />
+            </expression>
+            <first-end-point object-id='shares.csv_893425C9C75E444E83D09AF94130C88B' />
+            <second-end-point object-id='StokExchangeHistory.csv_F4FA6FCC96D24342AAB4F918E71FE89B' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Ticker]' />
+              <expression op='[Ticker (companies.csv)]' />
+            </expression>
+            <first-end-point object-id='shares.csv_893425C9C75E444E83D09AF94130C88B' />
+            <second-end-point object-id='companies.csv_947D04A0563D4EBBB142810BBF2C7D3B' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Ticker (companies.csv)]' />
+              <expression op='[Ticker (incomeStatements.csv)]' />
+            </expression>
+            <first-end-point object-id='companies.csv_947D04A0563D4EBBB142810BBF2C7D3B' />
+            <second-end-point object-id='incomeStatements.csv_CB9C8E60BDA6482AB148E4E2E18A90F7' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Ticker (companies.csv)]' />
+              <expression op='[Symbol]' />
+            </expression>
+            <first-end-point object-id='companies.csv_947D04A0563D4EBBB142810BBF2C7D3B' />
+            <second-end-point object-id='marketcap.csv_D3005C5B758E4400A4B48413574EBA7F' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Date (Dates.csv)]' />
+              <expression op='[published_date]' />
+            </expression>
+            <first-end-point object-id='Dates.csv_326AE527D9A54021A7DDC55A21BB7439' />
+            <second-end-point object-id='news.csv_205CD6D664964FF79AEEE7D3E300E945' />
+          </relationship>
+        </relationships>
+      </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    </datasource>
+  </datasources>
+  <actions>
+    <action caption='Highlight 1 (generated)' name='[Action1]'>
+      <activation auto-clear='true' type='on-select' />
+      <source type='sheet' worksheet='All Market Bull/Bear Analysis' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Measure Names' />
+        <param name='target' value='All Market Bull/Bear Analysis' />
+      </command>
+    </action>
+    <action caption='Highlight 2 (generated)' name='[Action2]'>
+      <activation auto-clear='true' type='on-select' />
+      <source dashboard='History' type='sheet' />
+      <command command='tsc:brush'>
+        <param name='field-captions' value='Measure Names' />
+        <param name='target' value='History' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='All Market Bull/Bear Analysis'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run fontsize='20'>S&amp;P 500 History Bull/Bear analysis</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column alias='Log' caption='Lin/Log Switcher' datatype='boolean' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='false'>
+              <calculation class='tableau' formula='false' />
+              <aliases>
+                <alias key='false' value='Log' />
+                <alias key='true' value='Linear' />
+              </aliases>
+            </column>
+            <column caption='Treshold' datatype='real' name='[Parameter 2]' param-domain-type='range' role='measure' type='quantitative' value='0.2'>
+              <calculation class='tableau' formula='0.2' />
+              <range granularity='0.001' max='0.22' min='0.18' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column caption='Bear Window' datatype='boolean' name='[Calculation_1475210417621200912]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Bear Window&#13;&#10;(WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]),0,364) - WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -364,0))/WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]),-364,0)&lt;=-[Parameters].[Parameter 2]'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Bear Window Index' datatype='integer' name='[Calculation_1475210417621229585]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='//Bear Window Index&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF [Calculation_1475210417621200912] AND NOT(LOOKUP([Calculation_1475210417621200912],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END&#13;&#10;END&#13;&#10;'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Bear Window Size' datatype='integer' name='[Calculation_1475210417621245970]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='//Bear Window Size&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF [Calculation_1475210417621200912] AND NOT(LOOKUP([Calculation_1475210417621200912],-1)) THEN 1 ELSE PREVIOUS_VALUE(0)+MIN(1) END&#13;&#10;END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Bear/Bull' datatype='string' name='[Calculation_1475210417621340180]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Bear/Bull&#13;&#10;IF [Calculation_1475210417621200912] THEN&#13;&#10;&#9;IF WINDOW_MAX(MAX([Close (StokExchangeHistory.csv)]), -[Calculation_1475210417621229585]+1, [Calculation_1475210417621245970])=MAX([Close (StokExchangeHistory.csv)])&#13;&#10;&#9;&#9;THEN &quot;Bear&quot;&#13;&#10;&#9;ELSEIF WINDOW_MIN(MAX([Close (StokExchangeHistory.csv)]), -[Calculation_1475210417621229585]+1, [Calculation_1475210417621245970])=MAX([Close (StokExchangeHistory.csv)])&#13;&#10;&#9;&#9;THEN &quot;Bull&quot;&#13;&#10;&#9;END&#13;&#10;END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Bear/Bull Densified' datatype='string' name='[Calculation_1475210417622179862]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='//Bear/Bull Densified&#13;&#10;IF NOT ISNULL([Calculation_1475210417621340180]) THEN [Calculation_1475210417621340180] ELSE PREVIOUS_VALUE([Calculation_1475210417621340180]) END&#13;&#10;'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column caption='Linear/Log Close' datatype='real' name='[Calculation_1475210417622196247]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='//Linear/Log Close&#13;&#10;IF [Parameters].[Parameter 1] THEN MAX([Close (StokExchangeHistory.csv)]) ELSE LOG(MAX([Close (StokExchangeHistory.csv)])) END' />
+            </column>
+            <column caption='Bear Values' datatype='real' name='[Calculation_1475210417634783259]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Calculation_1475210417622179862]=&quot;Bear&quot; THEN [Calculation_1475210417622196247] END'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='real' name='[Close (StokExchangeHistory.csv)]' role='measure' type='quantitative' />
+            <column datatype='date' name='[Date (StokExchangeHistory.csv)]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+            <column-instance column='[Date (StokExchangeHistory.csv)]' derivation='Min' name='[min:Date (StokExchangeHistory.csv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Date (StokExchangeHistory.csv)]' derivation='None' name='[none:Date (StokExchangeHistory.csv):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_1475210417622196247]' derivation='User' name='[usr:Calculation_1475210417622196247:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1475210417634783259]' derivation='User' name='[usr:Calculation_1475210417634783259:qk:6]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='Rows' />
+              <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417622179862]' ordering-type='Rows' />
+              <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621340180]' ordering-type='Rows' />
+              <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621200912]' ordering-type='Rows' />
+              <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621229585]' ordering-type='Rows' />
+              <table-calc field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Calculation_1475210417621245970]' ordering-type='Field'>
+                <order field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' />
+                <sort direction='DESC' using='[federated.11cnzon1q1xlc114ybf3j12kicml].[min:Date (StokExchangeHistory.csv):ok]' />
+              </table-calc>
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417634783259:qk:6]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]'>
+            <groupfilter function='member' level='[none:Ticker:nk]' member='&quot;AAPL&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]' included-values='non-null' />
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='width' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]' value='84' />
+            <encoding attr='space' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+            <format attr='title' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]' scope='cols' value='Date' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' value='Market Type'>
+              <formatted-text>
+                <run>Market Type</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='off' />
+            </view>
+            <mark class='Line' />
+          </pane>
+          <pane id='3' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[Multiple Values]'>
+            <view>
+              <breakdown value='off' />
+            </view>
+            <mark class='Area' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' />
+            </encodings>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk]'>
+            <view>
+              <breakdown value='off' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>([federated.11cnzon1q1xlc114ybf3j12kicml].[Multiple Values] + [federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417622196247:qk])</rows>
+        <cols>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (StokExchangeHistory.csv):qk]</cols>
+      </table>
+      <simple-id uuid='{2989BDF0-4657-4E6F-9374-5BF3811C212D}' />
+    </worksheet>
+    <worksheet name='Candle Chart'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+          </datasources>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column caption='High low' datatype='real' name='[Calculation_1475210417654870047]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Low])-SUM([High])' />
+            </column>
+            <column caption='Open Close Diff' datatype='real' name='[Calculation_1475210417655091232]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([Close])-SUM([Open])' />
+            </column>
+            <column datatype='real' name='[Close]' role='measure' type='quantitative' />
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='real' name='[High]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Low]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Open]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+            <column-instance column='[Ticker]' derivation='Attribute' name='[attr:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Close]' derivation='Sum' name='[sum:Close:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[High]' derivation='Sum' name='[sum:High:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Low]' derivation='Sum' name='[sum:Low:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Open]' derivation='Sum' name='[sum:Open:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Day-Trunc' name='[tdy:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1475210417654870047]' derivation='User' name='[usr:Calculation_1475210417654870047:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1475210417655091232]' derivation='User' name='[usr:Calculation_1475210417655091232:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='relative-date' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]' first-period='-1' include-future='true' include-null='false' last-period='0' period-type-v2='quarter' />
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' filter-group='3'>
+            <groupfilter function='member' level='[none:Ticker:nk]' member='&quot;AMZN&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Open:qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
+            <encoding attr='space' class='0' domain-expand='false' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk]' field-type='quantitative' scope='rows' type='space' />
+            <format attr='display' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Open:qk]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[tdy:Date:qk]' scope='cols' value='Day' />
+            <format attr='title' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk]' scope='rows' value='Price' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' center='0.0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' num-steps='2' palette='red_green_diverging_10_0' type='interpolated' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <size column='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417654870047:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-color' value='#555555' />
+                <format attr='size' value='0.0099999997764825821' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Open:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='GanttBar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' />
+              <size column='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close:qk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Low:qk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[attr:Ticker:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1.1534254550933838' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.11cnzon1q1xlc114ybf3j12kicml].[sum:High:qk] + [federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Open:qk])</rows>
+        <cols>[federated.11cnzon1q1xlc114ybf3j12kicml].[tdy:Date:qk]</cols>
+      </table>
+      <simple-id uuid='{79C52670-CCBF-4EDB-BE57-1BF05A9D57F5}' />
+    </worksheet>
+    <worksheet name='Company price forecasting'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+          </datasources>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column datatype='real' name='[Close]' role='measure' type='quantitative' />
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+            <column-instance column='[Ticker]' derivation='Attribute' name='[attr:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Close]' derivation='Sum' forecast-column-base='[sum:Close:qk]' forecast-column-type='forecast-value' name='[fVal:sum:Close:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Forecast Indicator]' derivation='None' forecast-column-base='[Forecast Indicator]' forecast-column-type='forecast-indicator' name='[none:Forecast Indicator:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Close]' derivation='Sum' name='[sum:Close:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Day-Trunc' name='[tdy:Date:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]' included-values='in-range'>
+            <min>#2016-07-23#</min>
+            <max>#2020-12-28#</max>
+          </filter>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' filter-group='3'>
+            <groupfilter function='member' level='[none:Ticker:nk]' member='&quot;AMZN&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[tdy:Date:qk]' field-type='quantitative' max='#2021-04-02 12:29:53.898#' min='#2020-05-11 11:30:06#' range-type='fixed' scope='cols' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Forecast Indicator:nk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[attr:Ticker:nk]' />
+              <text column='[federated.11cnzon1q1xlc114ybf3j12kicml].[fVal:sum:Close:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.11cnzon1q1xlc114ybf3j12kicml].[fVal:sum:Close:qk]</rows>
+        <cols>[federated.11cnzon1q1xlc114ybf3j12kicml].[tdy:Date:qk]</cols>
+        <forecast-specification auto-forecast-agg='true' band-confidence-level='95.000000' enabled='true' fill-type='fill-missing' ignore-last='1' model-type='custom' range-periods='Month-Trunc' range-size='1' range-type='next' season-type='ets-additive' show-prediction-bands='true' trend-type='ets-additive' />
+      </table>
+      <simple-id uuid='{548DA6DB-A2B2-4A2D-A134-F680DFEFF8FD}' />
+    </worksheet>
+    <worksheet name='Compare Close prices for NYSE companies'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Last 2 days price comparison &#10;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+          </datasources>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column caption='Last 2 days Index' datatype='integer' name='[Calculation_108086456014057472]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='INDEX()'>
+                <table-calc ordering-type='Rows' />
+              </calculation>
+            </column>
+            <column datatype='real' name='[Close]' role='measure' type='quantitative' />
+            <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Exchange]' role='dimension' type='nominal' />
+            <column datatype='real' name='[Market Cap]' role='measure' type='quantitative' />
+            <column datatype='string' name='[Name]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Sector]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+            <column-instance column='[Name]' derivation='Attribute' name='[attr:Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Exchange]' derivation='None' name='[none:Exchange:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sector]' derivation='None' name='[none:Sector:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Close]' derivation='Sum' name='[pcdf:sum:Close:qk:2]' pivot='key' type='quantitative'>
+              <table-calc diff-options='Relative' ordering-field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Date]' ordering-type='Field' type='PctDiff'>
+                <address>
+                  <value>-1</value>
+                </address>
+              </table-calc>
+            </column-instance>
+            <column-instance column='[Market Cap]' derivation='Sum' name='[sum:Market Cap:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_108086456014057472]' derivation='User' name='[usr:Calculation_108086456014057472:qk:2]' pivot='key' type='quantitative'>
+              <table-calc ordering-field='[federated.11cnzon1q1xlc114ybf3j12kicml].[Date]' ordering-type='Field' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[Date Set]' />
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[Exclusions (Date,Sector,Ticker)]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='level-members' level='[none:Date:qk]' />
+                <groupfilter function='level-members' level='[none:Sector:nk]' />
+                <groupfilter function='level-members' level='[none:Ticker:nk]' />
+              </groupfilter>
+              <groupfilter function='crossjoin'>
+                <groupfilter function='member' level='[none:Date:qk]' member='#2020-12-24#' />
+                <groupfilter function='crossjoin'>
+                  <groupfilter function='member' level='[none:Sector:nk]' member='&quot;Healthcare&quot;' />
+                  <groupfilter function='member' level='[none:Ticker:nk]' member='&quot;JNJ&quot;' />
+                </groupfilter>
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]' filter-group='4'>
+            <groupfilter function='member' level='[none:Exchange:nk]' member='&quot;NasdaqGS&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_108086456014057472:qk:2]' included-values='in-range'>
+            <min>2</min>
+            <max>2</max>
+          </filter>
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[Date Set]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_108086456014057472:qk:2]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[Exclusions (Date,Sector,Ticker)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' center='0.0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' max='0.03195125' min='-0.044217880000000001' palette='Stocks - Red-Green Diverging' type='interpolated' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' />
+              <text column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' />
+              <text column='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' />
+              <lod column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Sector:nk]' />
+              <size column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Market Cap:qk]' />
+              <lod column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' />
+              <lod column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]' />
+              <tooltip column='[federated.11cnzon1q1xlc114ybf3j12kicml].[attr:Name:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-transparency' value='255' />
+                <format attr='has-stroke' value='true' />
+                <format attr='stroke-color' value='#000000' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{0C92255C-ED93-4351-B643-1AD4B92401DE}' />
+    </worksheet>
+    <worksheet name='Sector Bubble Comparison'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Net Income per Sector&#10;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+          </datasources>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column datatype='string' name='[Exchange]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Sector]' role='dimension' type='nominal' />
+            <column caption='Gross Profit' datatype='integer' name='[grossProfit]' role='measure' type='quantitative' />
+            <column caption='Net Income' datatype='integer' name='[netIncome]' role='measure' type='quantitative' />
+            <column-instance column='[Exchange]' derivation='None' name='[none:Exchange:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Sector]' derivation='None' name='[none:Sector:nk]' pivot='key' type='nominal' />
+            <column-instance column='[grossProfit]' derivation='Sum' name='[sum:grossProfit:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[netIncome]' derivation='Sum' name='[sum:netIncome:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]' filter-group='4'>
+            <groupfilter function='member' level='[none:Exchange:nk]' member='&quot;NasdaqGS&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Sector:nk]'>
+            <groupfilter function='except' user:ui-domain='database' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Sector:nk]' />
+              <groupfilter function='member' level='[none:Sector:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Sector:nk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' palette='sunrise_sunset_diverging_10_0' type='interpolated' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <encodings>
+              <size column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:grossProfit:qk]' />
+              <text column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Sector:nk]' />
+              <text column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' />
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{2C65A46E-91D4-49A7-BEDD-7A19D94B395F}' />
+    </worksheet>
+    <worksheet name='Sheet 6'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+          </datasources>
+          <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+            <column datatype='real' name='[Close (Crypto.csv)]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Close]' role='measure' type='quantitative' />
+            <column datatype='date' name='[Date (Dates.csv)]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Ticker (Crypto.csv)]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+            <column-instance column='[Date (Dates.csv)]' derivation='None' name='[none:Date (Dates.csv):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Ticker (Crypto.csv)]' derivation='None' name='[none:Ticker (Crypto.csv):nk]' pivot='key' type='nominal' />
+            <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Close (Crypto.csv)]' derivation='Sum' name='[sum:Close (Crypto.csv):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Close]' derivation='Sum' name='[sum:Close:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker (Crypto.csv):nk]'>
+            <groupfilter function='member' level='[none:Ticker (Crypto.csv):nk]' member='&quot;BTC-USD&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]'>
+            <groupfilter function='member' level='[none:Ticker:nk]' member='&quot;AMZN&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker (Crypto.csv):nk]</column>
+            <column>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' />
+            </encodings>
+          </pane>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close (Crypto.csv):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' />
+            </encodings>
+          </pane>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close:qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close (Crypto.csv):qk] + [federated.11cnzon1q1xlc114ybf3j12kicml].[sum:Close:qk])</rows>
+        <cols>[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date (Dates.csv):qk]</cols>
+      </table>
+      <simple-id uuid='{ABB94BAD-7821-4AEE-A057-9AA5F0367C0B}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Exchange Dashboard'>
+      <style />
+      <size sizing-mode='automatic' />
+      <datasources>
+        <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+      </datasources>
+      <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+        <column datatype='string' name='[Exchange]' role='dimension' type='nominal' />
+        <column-instance column='[Exchange]' derivation='None' name='[none:Exchange:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <zones>
+        <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='4' w='100000' x='0' y='0'>
+          <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98230' id='21' param='horz' w='99064' x='468' y='885'>
+            <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98230' id='12' param='horz' w='89702' x='468' y='885'>
+              <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='98230' id='10' w='89702' x='468' y='885'>
+                <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='89050' id='7' param='horz' w='89702' x='468' y='10065'>
+                  <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='89050' id='5' w='89702' x='468' y='10065'>
+                    <zone h='89050' id='3' name='Compare Close prices for NYSE companies' w='69631' x='468' y='10065'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='89050' id='9' name='Sector Bubble Comparison' w='20071' x='70099' y='10065'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                  </zone>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' fixed-size='61' h='9180' id='8' is-fixed='true' name='Compare Close prices for NYSE companies' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' w='44851' x='468' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='9180' id='13' name='Sector Bubble Comparison' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' w='44851' x='45319' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+              </zone>
+            </zone>
+            <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' fixed-size='160' h='98230' id='20' is-fixed='true' param='vert' w='9362' x='90170' y='885'>
+              <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5752' id='22' mode='dropdown' name='Sector Bubble Comparison' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]' values='database' w='9362' x='90170' y='885'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='800' minheight='800' sizing-mode='vscroll' />
+          <zones>
+            <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='24' w='100000' x='0' y='0'>
+              <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98230' id='23' param='vert' w='99064' x='468' y='885'>
+                <zone fixed-size='280' h='89050' id='3' is-fixed='true' name='Compare Close prices for NYSE companies' w='69631' x='468' y='10065'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' fixed-size='61' h='9180' id='8' name='Compare Close prices for NYSE companies' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' w='44851' x='468' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5752' id='22' mode='dropdown' name='Sector Bubble Comparison' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Exchange:nk]' values='database' w='9362' x='90170' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='89050' id='9' is-fixed='true' name='Sector Bubble Comparison' w='20071' x='70099' y='10065'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='9180' id='13' name='Sector Bubble Comparison' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' w='44851' x='45319' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{EF7465AA-B36F-4D57-A648-07BC73DB4382}' />
+    </dashboard>
+    <dashboard name='History'>
+      <style />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <datasources>
+        <datasource name='Parameters' />
+      </datasources>
+      <datasource-dependencies datasource='Parameters'>
+        <column alias='Log' caption='Lin/Log Switcher' datatype='boolean' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='false'>
+          <calculation class='tableau' formula='false' />
+          <aliases>
+            <alias key='false' value='Log' />
+            <alias key='true' value='Linear' />
+          </aliases>
+          <members>
+            <member alias='Linear' value='true' />
+            <member alias='Log' value='false' />
+          </members>
+        </column>
+      </datasource-dependencies>
+      <zones>
+        <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='4' w='100000' x='0' y='0'>
+          <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98000' id='7' param='horz' w='98400' x='800' y='1000'>
+            <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='98000' id='5' w='82400' x='800' y='1000'>
+              <zone h='98000' id='3' name='All Market Bull/Bear Analysis' w='82400' x='800' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+            <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' fixed-size='160' h='98000' id='6' is-fixed='true' param='vert' w='16000' x='83200' y='1000'>
+              <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='8250' id='8' name='All Market Bull/Bear Analysis' pane-specification-id='3' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' w='16000' x='83200' y='1000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone _.fcp.SetMembershipControl.false...type='paramctrl' _.fcp.SetMembershipControl.true...type-v2='paramctrl' h='6500' id='9' mode='compact' param='[Parameters].[Parameter 1]' w='16000' x='83200' y='9250'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
+          <zones>
+            <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='37' w='100000' x='0' y='0'>
+              <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98000' id='36' param='vert' w='98400' x='800' y='1000'>
+                <zone fixed-size='280' h='98000' id='3' is-fixed='true' name='All Market Bull/Bear Analysis' w='82400' x='800' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='8250' id='8' name='All Market Bull/Bear Analysis' pane-specification-id='3' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' w='16000' x='83200' y='1000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='paramctrl' _.fcp.SetMembershipControl.true...type-v2='paramctrl' h='6500' id='9' mode='compact' param='[Parameters].[Parameter 1]' w='16000' x='83200' y='9250'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{A57A16DE-B9E6-4AF5-BFB4-ED31818528D1}' />
+    </dashboard>
+    <dashboard name='Single Company Analysis Dashboard'>
+      <style />
+      <size sizing-mode='automatic' />
+      <datasources>
+        <datasource caption='income_statement (stockexchange.income_statement) (HIVE)' name='federated.11cnzon1q1xlc114ybf3j12kicml' />
+      </datasources>
+      <datasource-dependencies datasource='federated.11cnzon1q1xlc114ybf3j12kicml'>
+        <column datatype='date' name='[Date]' role='dimension' type='ordinal' />
+        <column datatype='string' name='[Ticker]' role='dimension' type='nominal' />
+        <column-instance column='[Date]' derivation='None' name='[none:Date:qk]' pivot='key' type='quantitative' />
+        <column-instance column='[Ticker]' derivation='None' name='[none:Ticker:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <zones>
+        <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='4' w='100000' x='0' y='0'>
+          <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98230' id='7' param='horz' w='99064' x='468' y='885'>
+            <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='98230' id='5' w='89526' x='468' y='885'>
+              <zone h='49115' id='3' name='Candle Chart' w='89526' x='468' y='885'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone h='45575' id='17' name='Company price forecasting' w='89526' x='468' y='53540'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='3540' id='18' name='Company price forecasting' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Forecast Indicator:nk]' w='89526' x='468' y='50000'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+            <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' fixed-size='163' h='98230' id='6' is-fixed='true' param='vert' w='9538' x='89994' y='885'>
+              <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='7190' id='8' name='Candle Chart' pane-specification-id='2' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' w='9538' x='89994' y='885'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5752' id='9' mode='dropdown' name='Candle Chart' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' values='database' w='9538' x='89994' y='8075'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+              <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5642' id='10' name='Candle Chart' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]' values='database' w='9538' x='89994' y='13827'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
+      <devicelayouts>
+        <devicelayout auto-generated='true' name='Phone'>
+          <size maxheight='850' minheight='850' sizing-mode='vscroll' />
+          <zones>
+            <zone _.fcp.SetMembershipControl.false...type='layout-basic' _.fcp.SetMembershipControl.true...type-v2='layout-basic' h='100000' id='28' w='100000' x='0' y='0'>
+              <zone _.fcp.SetMembershipControl.false...type='layout-flow' _.fcp.SetMembershipControl.true...type-v2='layout-flow' h='98230' id='27' param='vert' w='99064' x='468' y='885'>
+                <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5752' id='9' mode='dropdown' name='Candle Chart' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Ticker:nk]' values='database' w='9538' x='89994' y='8075'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='filter' _.fcp.SetMembershipControl.true...type-v2='filter' h='5642' id='10' name='Candle Chart' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Date:qk]' values='database' w='9538' x='89994' y='13827'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='49115' id='3' is-fixed='true' name='Candle Chart' w='89526' x='468' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='7190' id='8' name='Candle Chart' pane-specification-id='2' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' w='9538' x='89994' y='885'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='45575' id='17' is-fixed='true' name='Company price forecasting' w='89526' x='468' y='53540'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone _.fcp.SetMembershipControl.false...type='color' _.fcp.SetMembershipControl.true...type-v2='color' h='3540' id='18' name='Company price forecasting' pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Forecast Indicator:nk]' w='89526' x='468' y='50000'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+              </zone>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='8' />
+              </zone-style>
+            </zone>
+          </zones>
+        </devicelayout>
+      </devicelayouts>
+      <simple-id uuid='{3052C92E-456D-49E4-87BF-BCED0234A837}' />
+    </dashboard>
+  </dashboards>
+  <windows source-height='30'>
+    <window class='worksheet' name='All Market Bull/Bear Analysis'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+            <card pane-specification-id='3' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{17454627-A052-4C86-855A-2DCB0CB37547}' />
+    </window>
+    <window class='worksheet' name='Candle Chart'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[usr:Calculation_1475210417655091232:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{9D1685B6-820B-4D47-8AEC-10DEB811AE82}' />
+    </window>
+    <window class='worksheet' name='Company price forecasting'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[none:Forecast Indicator:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A749C359-6F64-4983-A201-D71CFEE1E876}' />
+    </window>
+    <window class='worksheet' name='Compare Close prices for NYSE companies'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[pcdf:sum:Close:qk:2]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{7CBE597B-57DC-4E5F-BB78-9CED136CE146}' />
+    </window>
+    <window class='worksheet' name='Sector Bubble Comparison'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[sum:netIncome:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F49DE519-F6B8-4B64-86E7-FB2EF1094B37}' />
+    </window>
+    <window class='dashboard' name='History'>
+      <viewpoints>
+        <viewpoint name='All Market Bull/Bear Analysis'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{B0C1FDA0-DA08-4A20-874F-F6483C192988}' />
+    </window>
+    <window class='dashboard' name='Single Company Analysis Dashboard'>
+      <viewpoints>
+        <viewpoint name='Candle Chart'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Company price forecasting'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='6' />
+      <simple-id uuid='{8DCEB9BB-5C0E-4827-B94E-AD55AF94003E}' />
+    </window>
+    <window class='dashboard' name='Exchange Dashboard'>
+      <viewpoints>
+        <viewpoint name='Compare Close prices for NYSE companies' />
+        <viewpoint name='Sector Bubble Comparison' />
+      </viewpoints>
+      <active id='20' />
+      <simple-id uuid='{8C3FD37C-58F3-46BB-9FEF-9CC4D70EBAE9}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Sheet 6'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='0'>
+            <card pane-specification-id='1' param='[federated.11cnzon1q1xlc114ybf3j12kicml].[:Measure Names]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A639861D-BEBC-4851-BF94-3A300C443C9D}' />
+    </window>
+  </windows>
+</workbook>
