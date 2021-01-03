@@ -1,5 +1,5 @@
 # Thesis
-Stock market data analysis using Hortonworks Data Platform (HDP).
+Stock market data analysis using Hortonworks Data Platform (HDP).<br />
 To become more familiar with HDP Sandbox: https://www.cloudera.com/tutorials/getting-started-with-hdp-sandbox.html
 
 Architecture:
