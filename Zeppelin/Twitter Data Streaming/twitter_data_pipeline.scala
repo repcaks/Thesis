@@ -42,7 +42,8 @@ val batchInterval= Seconds(10)
 
 
 val ssc = new StreamingContext(spark.sparkContext, batchInterval)
- 
+ssc.checkpoint("/warehouse/checkpoint/twitter/")
+
 println("Stream Creating")
 
 val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
