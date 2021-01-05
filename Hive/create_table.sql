@@ -157,11 +157,3 @@ LOCATION 'hdfs://sandbox-hdp.hortonworks.com:8020/warehouse/tablespace/managed/h
 load data inpath 'hdfs://sandbox-hdp.hortonworks.com:8020/user/hive/tmp/data/covid.orc' into table stockexchange.coronavirus;
 
 
---Additional tables used by other services:
-
-CREATE TABLE IF NOT EXISTS ApplePricePredictionTmp
-AS select * from Share where ticker="AAPL"
-ORDER BY `date` asc;
-
-
-
